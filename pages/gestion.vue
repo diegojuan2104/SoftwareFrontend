@@ -1,5 +1,5 @@
 <template>
   <div>
-   <p>index </p>
+   <p>Preparate</p>
   </div>
 </template>
