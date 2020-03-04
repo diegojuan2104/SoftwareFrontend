@@ -56,7 +56,7 @@
         <b-form-group label="Dirección" label-for="direccionRep">
           <b-form-input
             class="form-control"
-            type="number"
+            type="text"
             id="direccionRep"
             placeholder="Ingrese dirección"
             v-model="propuesta.direccionRep"
@@ -68,7 +68,7 @@
         <b-form-group label="Tipo de convenio" label-for="tipoConvenio">
           <b-form-input
             class="form-control"
-            type="number"
+            type="text"
             id="tipoConvenio"
             placeholder="Ingrese tipo de convenio"
             v-model="propuesta.tipoConvenio"
@@ -98,9 +98,9 @@
         <b-button @click="actualizarEstudiante()" variant="primary" v-else>Actualizar estudiante</b-button>
       </b-form>
 
-      <b-table striped hover :items="lista_estudiantes">
+      <b-table striped hover :items="lista_propuestas">
         <template v-slot:cell(acciones)="row">
-          <b-button size="sm" @click="cargarEstudiante(row)" class="mr-2">Modificar</b-button>
+          <b-button size="sm" @click="cargarPropuesta(row)" class="mr-2">Modificar</b-button>
           <b-button size="sm" @click="eliminarEstudiante(row)" class="mr-2">Eliminar</b-button>
         </template>
       </b-table>

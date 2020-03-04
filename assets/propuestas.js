@@ -3,6 +3,7 @@ export default {
       return {
         enEdicion: false,
         propuesta: {
+          idPropuesta:"",
           nombreEntidad: "",
           nombreCompletoRep: "",
           emailRep: "",
@@ -15,8 +16,19 @@ export default {
         },
         lista_propuestas: [
           {
+            idPropuesta:"1",
+            nombreEntidad: "Comfama",
+            nombreCompletoRep: "Juan José Gomez Campe",
+            emailRep: "elcampin@gmail.com",
+            telefonoRep: "911",
+            direccionRep: "Cll Botadero, Robledo ",
+            tipoConvenio:"Idiomas",
+            iniciativa:"Cultural",
+            posiblesBeneficios:"Aprendizaje",
+            estado:""
           }
         ],
+        
         opciones_convenio: [
           { value: null, text: "Seleccione un convenio", disabled: true },
           { value: "001", text: "Convenio de intercambio" },
@@ -24,9 +36,15 @@ export default {
         ]
       };
     },
+    
+    created(){
+      let datosDB = JSON.parse (localStorage.getItem('infoDB'));
+      console.log(datosDB)
+    },
     methods: {
       crearPropuesta() {
-        this.propuesta.estado = "Etapa de Revisión"
+        this.propuesta.estado = "Etapa de Revisión",
+        this.propuesta.idPropuesta = this.lista_propuestas.length,
         this.lista_propuestas.push(this.propuesta);
         this.propuesta = {
           nombreEntidad: "",
@@ -42,31 +60,34 @@ export default {
         console.log(this.lista_propuestas)
       },
       eliminarPropuesta({ item }) {
-        let posicion = this.lista_estudiantes.findIndex(
-          estudiante => estudiante.id == item.id
+        let posicion = this.lista_propuestas.findIndex(
+          propuesta => estudiante.idPropuesta == item.id
         );
         this.lista_estudiantes.splice(posicion, 1);
       },
-      cargarEstudiante({ item }) {
-        let estu = this.lista_estudiantes.find(
-          estudiante => estudiante.id == item.id
+      cargarPropuesta({ item }) {
+        let prop = this.lista_propuestas.find(
+          propuesta => propuesta.idPropuesta == item.id
         );
         this.enEdicion = true;
-        this.estudiante = Object.assign({}, estu);
+        this.estudiante = Object.assign({}, prop);
       },
-      actualizarEstudiante() {
-        let posicion = this.lista_estudiantes.findIndex(
-          estudiante => estudiante.id == this.estudiante.id
+      actualizarPropuesta() {
+        let posicion = this.lista_propuestas.findIndex(
+          propuesta => propuesta.idPropuesta == this.estudiante.id
         );
         this.lista_estudiantes.splice(posicion, 1, this.estudiante);
-        this.estudiante = {
-          id: "",
-          nombre: "",
-          edad: 0,
-          correo: "",
-          carrera: null,
-          acciones: true
+        this.propuesta = {
+          nombreEntidad: "",
+          nombreCompletoRep: "",
+          emailRep: "",
+          telefonoRep: "",
+          direccionRep: "",
+          tipoConvenio:"",
+          iniciativa:"",
+          posiblesBeneficios:"",
+          estado:""
         };
-      }
-    }
+      },
+    },
   };
