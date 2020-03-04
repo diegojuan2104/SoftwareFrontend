@@ -1,6 +1,6 @@
 # Propuestas
 
-> Este es un proyecto para la gentión de propuestas de convenios entre universidades de la Universidad de Medellin
+> Este es un proyecto para la gestion de propuestas de convenios entre la Universidad de Medellin y otras universidades
 
 ## Build Setup
 
