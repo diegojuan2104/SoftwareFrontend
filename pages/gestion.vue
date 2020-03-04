@@ -12,7 +12,7 @@
           <b-form-input
             class="form-control"
             type="text"
-            placeholder="Ingrese el nombre de la entidad a realizar uns convenio con la Universidad de Medellín"
+            placeholder="Ingrese el nombre de la entidad a realizar un convenio con la Universidad de Medellín"
             id="nombreEntidad"
             v-model="propuesta.nombreEntidad"
           />

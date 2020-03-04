@@ -38,14 +38,19 @@ export default {
     },
     
     created(){
-      let datosDB = JSON.parse (localStorage.getItem('infoDB'));
-      console.log(datosDB)
+      let listaObtenida = JSON.parse (localStorage.getItem("Lista"));
+      if(listaObtenida){
+        this.lista_propuestas = listaObtenida
+      }else{
+        this.lista_propuestas = []
+      }
     },
     methods: {
       crearPropuesta() {
         this.propuesta.estado = "Etapa de Revisión",
-        this.propuesta.idPropuesta = this.lista_propuestas.length,
+        this.propuesta.idPropuesta = this.lista_propuestas.length + 1,
         this.lista_propuestas.push(this.propuesta);
+        localStorage.setItem("Lista",JSON.stringify(this.lista_propuestas))
         this.propuesta = {
           nombreEntidad: "",
           nombreCompletoRep: "",
