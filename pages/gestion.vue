@@ -91,7 +91,7 @@
             type="text"
             id="beneficiosConvenio"
             placeholder="Mencione posibles beneficios del convenio"
-            v-model="propuesta.beneficios"
+            v-model="propuesta.posiblesBeneficios"
           />
         </b-form-group>
         <b-button class="bg-udem" type="submit"  v-if="!enEdicion">Subir info</b-button>
