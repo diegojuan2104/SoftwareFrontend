@@ -7,13 +7,14 @@
       
       <br />
 
-      <b-form action="javascript:void(0)" @submit="crearEstudiante()">
+      <b-form action="javascript:void(0)" @submit="crearPropuesta()">
         <b-form-group label="Nombre de la entidad" label-for="nombreEntidad">
           <b-form-input
             class="form-control"
             type="text"
             placeholder="Ingrese el nombre de la entidad a realizar uns convenio con la Universidad de Medellín"
             id="nombreEntidad"
+            v-model="propuesta.nombreEntidad"
           />
         </b-form-group>
         <br />
@@ -26,15 +27,17 @@
             type="text"
             id="nombreRep"
             placeholder="Ingrese nombre completo"
+            v-model="propuesta.nombreCompletoRep"
           />
         </b-form-group> 
 
         <b-form-group label="Email" label-for="emailRep">
           <b-form-input
             class="form-control"
-            type="mail"
+            type="text"
             id="emailRep"
             placeholder="Ingrese correo electrónico"
+            v-model="propuesta.emailRep"
           />
         </b-form-group> 
       
@@ -45,6 +48,7 @@
             type="number"
             id="telefonoRep"
             placeholder="Ingrese telefóno de contacto"
+            v-model="propuesta.telefonoRep"
           />
         </b-form-group> 
 
@@ -55,19 +59,41 @@
             type="number"
             id="direccionRep"
             placeholder="Ingrese dirección"
+            v-model="propuesta.direccionRep"
           />
         </b-form-group> 
 
         <h3>Información del Convenio</h3>
          <p>Ingrese a continuación la siguiente información acerca del convenio</p>
-        <b-form-group label="" label-for="direccionRep">
+        <b-form-group label="Tipo de convenio" label-for="tipoConvenio">
           <b-form-input
             class="form-control"
             type="number"
-            id="direccionRep"
+            id="tipoConvenio"
             placeholder="Ingrese tipo de convenio"
+            v-model="propuesta.tipoConvenio"
           />
         </b-form-group> 
+
+        <b-form-group label="Iniciativa" label-for="razonConvenio">
+          <b-form-input
+            class="form-control"
+            type="text"
+            id="razonConvenio"
+            placeholder="Detalle el objetívo o propósito de la iniciativa"
+            v-model="propuesta.iniciativa"
+          />
+        </b-form-group>
+
+        <b-form-group label="Posibles beneficios" label-for="beneificiosConvenio">
+          <b-form-input
+            class="form-control"
+            type="text"
+            id="beneficiosConvenio"
+            placeholder="Mencione posibles beneficios del convenio"
+            v-model="propuesta.beneficios"
+          />
+        </b-form-group>
         <b-button class="bg-udem" type="submit"  v-if="!enEdicion">Subir info</b-button>
         <b-button @click="actualizarEstudiante()" variant="primary" v-else>Actualizar estudiante</b-button>
       </b-form>
@@ -82,4 +108,5 @@
   </div>
 </template>
 
- <!--<script src="@/assets/estudiantes.js"/>
+
+<script src="@/assets/propuestas.js"/>
