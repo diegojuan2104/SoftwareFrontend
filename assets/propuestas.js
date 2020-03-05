@@ -58,11 +58,18 @@ export default {
 
   created() {
     let listaObtenida = JSON.parse(localStorage.getItem("Lista"));
+    let listaReducida = JSON.parse(localStorage.getItem("ListaReducida"));
     if (listaObtenida) {
       this.lista_propuestas = listaObtenida
     } else {
       this.lista_propuestas = []
     }
+    if (listaReducida) {
+      this.listareducida = listaReducida
+    } else {
+      this.listareducida = []
+    }
+
   },
   methods: {
     crearPropuesta() {
@@ -78,6 +85,7 @@ export default {
       this.propuestareducida.estadoPropuesta = this.propuesta.estado
       this.listareducida.push(this.propuestareducida)
       localStorage.setItem("Lista", JSON.stringify(this.lista_propuestas))
+      localStorage.setItem("ListaReducida", JSON.stringify(this.listareducida))
       
       this.limpiarCampos()
 
