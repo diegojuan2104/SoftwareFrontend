@@ -15,6 +15,7 @@
             placeholder="Ingrese el nombre de la entidad a realizar un convenio con la Universidad de Medellín"
             id="nombreEntidad"
             v-model="propuesta.nombreEntidad"
+            v-bind:required="true"
           />
         </b-form-group>
         <br />
@@ -35,7 +36,7 @@
         <b-form-group label="Email" label-for="emailRep">
           <b-form-input
             class="form-control"
-            type="text"
+            type="email"
             id="emailRep"
             placeholder="Ingrese correo electrónico"
             v-model="propuesta.emailRep"

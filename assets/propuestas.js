@@ -68,9 +68,9 @@ export default {
     crearPropuesta() {
 
       this.propuesta.estado = "Etapa de Revisión",
-        this.propuesta.id = this.lista_propuestas.length + 1,
-        this.lista_propuestas.push(this.propuesta);
-      this.propuestareducida.idPropuesta = this.propuesta.idPropuesta
+      this.propuesta.idPropuesta = this.lista_propuestas.length + 1,
+      this.lista_propuestas.push(this.propuesta);
+      this.propuestareducida.id = this.propuesta.idPropuesta
       this.propuestareducida.nombreEntidad = this.propuesta.nombreEntidad
       this.propuestareducida.nombreRepresentante = this.propuesta.nombreCompletoRep
       this.propuestareducida.email = this.propuesta.emailRep
