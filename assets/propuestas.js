@@ -78,6 +78,7 @@ export default {
       this.propuestareducida.estadoPropuesta = this.propuesta.estado
       this.listareducida.push(this.propuestareducida)
       localStorage.setItem("Lista", JSON.stringify(this.lista_propuestas))
+      
       this.limpiarCampos()
 
       console.log(this.lista_propuestas)
@@ -98,6 +99,14 @@ export default {
     },
 
     limpiarCampos() {
+      this.propuestareducida = {
+        id: "",
+        nombreEntidad: "",
+        nombreRepresentante: "",
+        email: "",
+        iniciativa: "",
+        estadoPropuesta: ""
+      }
       this.propuesta = {
         nombreEntidad: "",
         nombreCompletoRep: "",
