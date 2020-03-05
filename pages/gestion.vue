@@ -28,6 +28,7 @@
             id="nombreRep"
             placeholder="Ingrese nombre completo"
             v-model="propuesta.nombreCompletoRep"
+            v-bind:required="true"
           />
         </b-form-group> 
 
@@ -38,6 +39,7 @@
             id="emailRep"
             placeholder="Ingrese correo electrónico"
             v-model="propuesta.emailRep"
+            v-bind:required="true"
           />
         </b-form-group> 
       
@@ -49,6 +51,7 @@
             id="telefonoRep"
             placeholder="Ingrese telefóno de contacto"
             v-model="propuesta.telefonoRep"
+            v-bind:required="true"
           />
         </b-form-group> 
 
@@ -60,6 +63,7 @@
             id="direccionRep"
             placeholder="Ingrese dirección"
             v-model="propuesta.direccionRep"
+            v-bind:required="true"
           />
         </b-form-group> 
 
@@ -72,6 +76,7 @@
             id="tipoConvenio"
             placeholder="Ingrese tipo de convenio"
             v-model="propuesta.tipoConvenio"
+            v-bind:required="true"
           />
         </b-form-group> 
 
@@ -82,6 +87,7 @@
             id="razonConvenio"
             placeholder="Detalle el objetívo o propósito de la iniciativa"
             v-model="propuesta.iniciativa"
+            v-bind:required="true"
           />
         </b-form-group>
 
@@ -92,13 +98,14 @@
             id="beneficiosConvenio"
             placeholder="Mencione posibles beneficios del convenio"
             v-model="propuesta.posiblesBeneficios"
+            v-bind:required="true"
           />
         </b-form-group>
         <b-button class="bg-udem" type="submit"  v-if="!enEdicion">Subir info</b-button>
         <b-button @click="actualizarEstudiante()" variant="primary" v-else>Actualizar estudiante</b-button>
       </b-form>
 
-      <b-table striped hover :items="lista_propuestas">
+      <b-table striped hover :items="listareducida">
         <template v-slot:cell(acciones)="row">
           <b-button size="sm" @click="cargarPropuesta(row)" class="mr-2">Modificar</b-button>
           <b-button size="sm" @click="eliminarEstudiante(row)" class="mr-2">Eliminar</b-button>
