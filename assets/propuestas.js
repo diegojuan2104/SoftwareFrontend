@@ -17,18 +17,6 @@ export default {
         estado: ""
       },
       lista_propuestas: [
-        {
-          idPropuesta: "1",
-          nombreEntidad: "Comfama",
-          nombreCompletoRep: "Juan José Gomez Campe",
-          emailRep: "elcampin@gmail.com",
-          telefonoRep: "911",
-          direccionRep: "Cll Botadero, Robledo ",
-          tipoConvenio: "Idiomas",
-          iniciativa: "Cultural",
-          posiblesBeneficios: "Aprendizaje",
-          estado: ""
-        }
       ],
       propuestareducida: {
         id: "",
@@ -40,7 +28,6 @@ export default {
         Modificar: true,
         Eliminar: true
       },
-
 
 
       listareducida: [{
