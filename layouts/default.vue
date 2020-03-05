@@ -9,7 +9,8 @@
     <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item">
-          <nuxt-link  class="wf" to="/gestion">Inscripción de Convenio</nuxt-link>
+          <nuxt-link  class="wf" to="/gestion">-Inscripción de Convenio-</nuxt-link>
+          <nuxt-link  class="wf" to="/seguimiento" >-Evaluacion de Convenio-</nuxt-link>
       </li>
     </ul>
     </div>
