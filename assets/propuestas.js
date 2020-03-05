@@ -4,7 +4,9 @@ export default {
       enEdicion: false,
       propuesta: {
         idPropuesta: "",
+        identificacion:"",
         nombreEntidad: "",
+        ocupacion:"",
         nombreCompletoRep: "",
         emailRep: "",
         telefonoRep: "",
@@ -34,7 +36,9 @@ export default {
         nombreRepresentante: "",
         email: "",
         iniciativa: "",
-        estadoPropuesta: ""
+        estadoPropuesta: "",
+        Modificar: true,
+        Eliminar: true
       },
 
 
@@ -55,21 +59,8 @@ export default {
       ]
     };
   },
-
-  created() {
-    let listaObtenida = JSON.parse(localStorage.getItem("Lista"));
-    let listaReducida = JSON.parse(localStorage.getItem("ListaReducida"));
-    if (listaObtenida) {
-      this.lista_propuestas = listaObtenida
-    } else {
-      this.lista_propuestas = []
-    }
-    if (listaReducida) {
-      this.listareducida = listaReducida
-    } else {
-      this.listareducida = []
-    }
-
+  mounted(){
+    this.created();
   },
   methods: {
     crearPropuesta() {
@@ -83,6 +74,8 @@ export default {
       this.propuestareducida.email = this.propuesta.emailRep
       this.propuestareducida.iniciativa = this.propuesta.iniciativa
       this.propuestareducida.estadoPropuesta = this.propuesta.estado
+      this.propuestareducida.Modificar = true
+      this.propuestareducida.Eliminar = true
       this.listareducida.push(this.propuestareducida)
       localStorage.setItem("Lista", JSON.stringify(this.lista_propuestas))
       localStorage.setItem("ListaReducida", JSON.stringify(this.listareducida))
@@ -92,18 +85,36 @@ export default {
       console.log(this.lista_propuestas)
 
     },
+    created() {
+      let listaObtenida = JSON.parse(localStorage.getItem("Lista"));
+      let listaReducida = JSON.parse(localStorage.getItem("ListaReducida"));
+      if (listaObtenida) {
+        this.lista_propuestas = listaObtenida
+      } else {
+        this.lista_propuestas = []
+      }
+      if (listaReducida) {
+        this.listareducida = listaReducida
+      } else {
+        this.listareducida = []
+      }
+  
+    },
     eliminarPropuesta({ item }) {
       let posicion = this.lista_propuestas.findIndex(
-        propuesta => estudiante.idPropuesta == item.id
+        propuesta => propuesta.idPropuesta == item.id
       );
-      this.lista_estudiantes.splice(posicion, 1);
+      this.lista_propuestas.splice(posicion, 1);
+      this.listareducida.splice(posicion,1)
+      localStorage.setItem("Lista", JSON.stringify(this.lista_propuestas))
+      localStorage.setItem("ListaReducida", JSON.stringify(this.listareducida))
     },
     cargarPropuesta({ item }) {
       let prop = this.lista_propuestas.find(
         propuesta => propuesta.idPropuesta == item.id
       );
       this.enEdicion = true;
-      this.estudiante = Object.assign({}, prop);
+      this.propuesta = Object.assign({}, prop);
     },
 
     limpiarCampos() {
@@ -132,20 +143,22 @@ export default {
 
     actualizarPropuesta() {
       let posicion = this.lista_propuestas.findIndex(
-        propuesta => propuesta.idPropuesta == this.estudiante.id
+        x => x.identificacion == this.propuesta.identificacion
       );
-      this.lista_estudiantes.splice(posicion, 1, this.estudiante);
-      this.propuesta = {
-        nombreEntidad: "",
-        nombreCompletoRep: "",
-        emailRep: "",
-        telefonoRep: "",
-        direccionRep: "",
-        tipoConvenio: "",
-        iniciativa: "",
-        posiblesBeneficios: "",
-        estado: ""
-      };
+      this.lista_propuestas.splice(posicion, 1, this.propuesta);
+      this.propuestareducida.id = this.propuesta.idPropuesta
+      this.propuestareducida.nombreEntidad = this.propuesta.nombreEntidad
+      this.propuestareducida.nombreRepresentante = this.propuesta.nombreCompletoRep
+      this.propuestareducida.email = this.propuesta.emailRep
+      this.propuestareducida.iniciativa = this.propuesta.iniciativa
+      this.propuestareducida.estadoPropuesta = this.propuesta.estado
+      this.propuestareducida.Modificar = true
+      this.propuestareducida.Eliminar = true
+      this.listareducida.splice(posicion, 1, this.propuestareducida);
+      localStorage.setItem("Lista", JSON.stringify(this.lista_propuestas))
+      localStorage.setItem("ListaReducida", JSON.stringify(this.listareducida))
+      this.limpiarCampos()
+      this.enEdicion = false
     },
   },
 };

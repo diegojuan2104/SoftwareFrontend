@@ -22,6 +22,17 @@
         <h3>Información del representante</h3>
          <p>Ingrese a continuación la siguiente información acerca del representante de la entidad.</p>
 
+         <b-form-group label="Identificacion" label-for="identificacion">
+          <b-form-input
+            class="form-control"
+            type="text"
+            id="id"
+            placeholder="Ingrese el numero de su documento"
+            v-model="propuesta.identificacion"
+            v-bind:required="true"
+          />
+        </b-form-group> 
+
         <b-form-group label="Nombre Completo" label-for="nombreRep">
           <b-form-input
             class="form-control"
@@ -31,7 +42,18 @@
             v-model="propuesta.nombreCompletoRep"
             v-bind:required="true"
           />
-        </b-form-group> 
+        </b-form-group>
+
+        <b-form-group label="Ocupacion" label-for="ocupacion">
+          <b-form-input
+            class="form-control"
+            type="text"
+            id="ocupacion"
+            placeholder="Ingrese su ocupacion"
+            v-model="propuesta.ocupacion"
+            v-bind:required="true"
+          />
+        </b-form-group>  
 
         <b-form-group label="Email" label-for="emailRep">
           <b-form-input
@@ -103,13 +125,15 @@
           />
         </b-form-group>
         <b-button class="bg-udem" type="submit"  v-if="!enEdicion">Subir info</b-button>
-        <b-button @click="actualizarEstudiante()" variant="primary" v-else>Actualizar estudiante</b-button>
+        <b-button clas="bg-udem" @click="actualizarPropuesta()" variant="primary" v-else>Actualizar estudiante</b-button>
       </b-form>
 
       <b-table striped hover :items="listareducida">
-        <template v-slot:cell(acciones)="row">
-          <b-button size="sm" @click="cargarPropuesta(row)" class="mr-2">Modificar</b-button>
-          <b-button size="sm" @click="eliminarEstudiante(row)" class="mr-2">Eliminar</b-button>
+        <template v-slot:cell(Modificar)="row">
+          <b-button size="sm" @click="cargarPropuesta(row)" class="bg-udem">Modificar</b-button>
+        </template>
+        <template v-slot:cell(Eliminar)="row">
+          <b-button size="sm" @click="eliminarPropuesta(row)" class="bg-udem">Eliminar</b-button>
         </template>
       </b-table>
     </b-container>
