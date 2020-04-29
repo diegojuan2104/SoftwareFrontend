@@ -20,7 +20,7 @@
         </b-form-group>
         <br />
         <h3>Información del representante</h3>
-         <p>Ingrese a continuación la siguiente información acerca del representante de la entidad.</p>
+         <p>Ingrese a continuación la siguiente información acerca de la persona que propone el convenio.</p>
 
          <b-form-group label="Identificacion" label-for="identificacion">
           <b-form-input
@@ -33,13 +33,13 @@
           />
         </b-form-group> 
 
-        <b-form-group label="Nombre Completo" label-for="nombreRep">
+        <b-form-group label="Nombre Completo" label-for="nombre">
           <b-form-input
             class="form-control"
             type="text"
-            id="nombreRep"
+            id="nombre"
             placeholder="Ingrese nombre completo"
-            v-model="propuesta.nombreCompletoRep"
+            v-model="propuesta.nombreCompleto"
             v-bind:required="true"
           />
         </b-form-group>
@@ -55,37 +55,37 @@
           />
         </b-form-group>  
 
-        <b-form-group label="Email" label-for="emailRep">
+        <b-form-group label="Email" label-for="email">
           <b-form-input
             class="form-control"
             type="email"
-            id="emailRep"
+            id="email"
             placeholder="Ingrese correo electrónico"
-            v-model="propuesta.emailRep"
+            v-model="propuesta.email"
             v-bind:required="true"
           />
         </b-form-group> 
       
 
-      <b-form-group label="Teléfono" label-for="telefonoRep">
+      <b-form-group label="Teléfono" label-for="telefono">
           <b-form-input
             class="form-control"
             type="number"
-            id="telefonoRep"
+            id="telefono"
             placeholder="Ingrese telefóno de contacto"
-            v-model="propuesta.telefonoRep"
+            v-model="propuesta.telefono"
             v-bind:required="true"
           />
         </b-form-group> 
 
 
-        <b-form-group label="Dirección" label-for="direccionRep">
+        <b-form-group label="Dirección" label-for="direccion">
           <b-form-input
             class="form-control"
             type="text"
-            id="direccionRep"
+            id="direccion"
             placeholder="Ingrese dirección"
-            v-model="propuesta.direccionRep"
+            v-model="propuesta.direccion"
             v-bind:required="true"
           />
         </b-form-group> 

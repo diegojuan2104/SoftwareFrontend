@@ -4,13 +4,13 @@ export default {
       enEdicion: false,
       propuesta: {
         idPropuesta: "",
-        identificacion:"",
+        identificacion:"",     
         nombreEntidad: "",
         ocupacion:"",
-        nombreCompletoRep: "",
-        emailRep: "",
-        telefonoRep: "",
-        direccionRep: "",
+        nombreCompleto: "",
+        email: "",
+        telefono: "",
+        direccion: "",
         tipoConvenio: "",
         iniciativa: "",
         posiblesBeneficios: "",
@@ -21,7 +21,7 @@ export default {
       propuestareducida: {
         id: "",
         nombreEntidad: "",
-        nombreRepresentante: "",
+        nombre: "",
         email: "",
         iniciativa: "",
         estadoPropuesta: "",
@@ -33,7 +33,7 @@ export default {
       listareducida: [{
         id: "1",
         nombreEntidad: "confama",
-        nombreRepresentante: "juan jose gomez campe",
+        nombre: "juan jose gomez campe",
         email: "elcampin@gmail.com",
         iniciativa: "Cultural",
         estadoPropuesta: ""
@@ -57,8 +57,8 @@ export default {
       this.lista_propuestas.push(this.propuesta);
       this.propuestareducida.id = this.propuesta.idPropuesta
       this.propuestareducida.nombreEntidad = this.propuesta.nombreEntidad
-      this.propuestareducida.nombreRepresentante = this.propuesta.nombreCompletoRep
-      this.propuestareducida.email = this.propuesta.emailRep
+      this.propuestareducida.nombre = this.propuesta.nombreCompleto
+      this.propuestareducida.email = this.propuesta.email
       this.propuestareducida.iniciativa = this.propuesta.iniciativa
       this.propuestareducida.estadoPropuesta = this.propuesta.estado
       this.propuestareducida.Modificar = true
@@ -108,17 +108,17 @@ export default {
       this.propuestareducida = {
         id: "",
         nombreEntidad: "",
-        nombreRepresentante: "",
+        nombre: "",
         email: "",
         iniciativa: "",
         estadoPropuesta: ""
       }
       this.propuesta = {
         nombreEntidad: "",
-        nombreCompletoRep: "",
-        emailRep: "",
-        telefonoRep: "",
-        direccionRep: "",
+        nombreCompleto: "",
+        email: "",
+        telefono: "",
+        direccion: "",
         tipoConvenio: "",
         iniciativa: "",
         posiblesBeneficios: "",
@@ -135,8 +135,8 @@ export default {
       this.lista_propuestas.splice(posicion, 1, this.propuesta);
       this.propuestareducida.id = this.propuesta.idPropuesta
       this.propuestareducida.nombreEntidad = this.propuesta.nombreEntidad
-      this.propuestareducida.nombreRepresentante = this.propuesta.nombreCompletoRep
-      this.propuestareducida.email = this.propuesta.emailRep
+      this.propuestareducida.nombre = this.propuesta.nombreCompleto
+      this.propuestareducida.email = this.propuesta.email
       this.propuestareducida.iniciativa = this.propuesta.iniciativa
       this.propuestareducida.estadoPropuesta = this.propuesta.estado
       this.propuestareducida.Modificar = true
