@@ -1,0 +1,19 @@
+{
+  "name": "Propuestas",
+  "version": "1.0.0",
+  "description": "Este es un proyecto para la gentión de propuestas de convenios entre universidades de la Universidad de Medellin",
+  "author": "Diego",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "bootstrap-vue": "^2.0.0",
+    "nuxt": "^2.0.0"
+  },
+  "devDependencies": {}
+}
