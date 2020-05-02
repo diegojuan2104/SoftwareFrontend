@@ -4,6 +4,28 @@
       <!-- Content here -->
       <h1>Evaluacion de propuesta de convenio</h1>
       <br />
+
+
+
+      <b-card class="bcard">
+        <b-table striped hover :items="listareducida">
+          <template v-slot:cell(Modificar)="row">
+            <b-button size="sm" @click="cargarPropuesta(row)" class="bg-udem boton"
+              >ver</b-button
+            >
+          </template>
+          <template v-slot:cell(Eliminar)="row">
+            <b-button size="sm" @click="eliminarPropuesta(row)" class="bg-udem boton"
+              >evaluar</b-button
+            >
+          </template>
+        </b-table>
+      </b-card>
+
+
+
+
+
       <b-form action="javascript:void(0)" @submit="crearEvaluacion()">
         <b-form-group label="Identificacion de la propuesta a evaluar" label-for="nombreEntidad">
           <b-form-input
@@ -62,3 +84,5 @@
 
 
 <script src="@/assets/evaluacion.js"/>
+
+
