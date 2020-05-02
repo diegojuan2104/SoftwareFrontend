@@ -5,7 +5,7 @@
 
       <div>
         <b-card class="bcard" title="">
-          <b-form action="javascript:void(0)" @submit="crearPropuesta()">
+          <b-form action="javascript:void(0)"  @submit="crearPropuesta()">
             <h1>Inscripción propuesta de convenio</h1>
             <b-form-group
               label="Nombre de la entidad"
@@ -127,10 +127,13 @@
               <b-form-input
                 class="form-control"
                 type="text"
+                aria-required="true"
                 id="beneficiosConvenio"
                 placeholder="Mencione posibles beneficios del convenio"
                 v-model="propuesta.posiblesBeneficios"
                 v-bind:required="true"
+                
+                
               />
             </b-form-group>
 
@@ -142,7 +145,7 @@
                 clas="bg-udem boton"
                 @click="actualizarPropuesta()"
                 v-else
-                >Actualizar estudiante</b-button
+                >Actualizar propuesta</b-button
               >
             </div>
           </b-form>

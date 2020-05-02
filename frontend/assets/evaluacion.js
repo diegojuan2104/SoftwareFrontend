@@ -98,8 +98,9 @@ export default {
       );
       this.lista_evaluaciones.splice(posicion, 1, this.evaluacion);
       localStorage.setItem("listaEvaluacion", JSON.stringify(this.lista_evaluaciones))
-      this.limpiarCampos()
+      
       this.enEdicion = false
+      this.limpiarCampos()
     },
   }
 };
