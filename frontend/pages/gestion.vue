@@ -127,11 +127,11 @@
               <b-form-input
                 class="form-control"
                 type="text"
-                aria-required="true"
                 id="beneficiosConvenio"
                 placeholder="Mencione posibles beneficios del convenio"
                 v-model="propuesta.posiblesBeneficios"
                 v-bind:required="true"
+                
                 
                 
               />

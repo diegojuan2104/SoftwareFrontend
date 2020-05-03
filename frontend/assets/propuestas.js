@@ -126,7 +126,7 @@ export default {
         iniciativa: "",
         estadoPropuesta: ""
       }
-      console.log("aqui estoy socio")
+      
     },
 
 
@@ -156,6 +156,7 @@ export default {
 
         this.limpiarCampos()
       } else {
+        
         alert("Todos los campos son OBLIGATORIOS");
 
       }
