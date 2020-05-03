@@ -5,7 +5,7 @@
 
       <div>
         <b-card class="bcard" title="">
-          <b-form action="javascript:void(0)"  @submit="crearPropuesta()">
+          <b-form action="javascript:void(0)" @submit="crearPropuesta()">
             <h1>Inscripción propuesta de convenio</h1>
             <b-form-group
               label="Nombre de la entidad"
@@ -131,9 +131,6 @@
                 placeholder="Mencione posibles beneficios del convenio"
                 v-model="propuesta.posiblesBeneficios"
                 v-bind:required="true"
-                
-                
-                
               />
             </b-form-group>
 
@@ -157,12 +154,18 @@
       <b-card class="bcard">
         <b-table striped hover :items="listareducida">
           <template v-slot:cell(Modificar)="row">
-            <b-button size="sm" @click="cargarPropuesta(row)" class="bg-udem boton"
+            <b-button
+              size="sm"
+              @click="cargarPropuesta(row)"
+              class="bg-udem boton"
               >Modificar</b-button
             >
           </template>
           <template v-slot:cell(Eliminar)="row">
-            <b-button size="sm" @click="eliminarPropuesta(row)" class="bg-udem boton"
+            <b-button
+              size="sm"
+              @click="eliminarPropuesta(row)"
+              class="bg-udem boton"
               >Eliminar</b-button
             >
           </template>
@@ -173,3 +176,27 @@
 </template>
 
 <script src="@/assets/propuestas.js" />
+
+<script>
+import config from "@/assets/config/index";
+import axios from "axios";
+export default {
+  beforeMount() {
+    this.cargarPropuestas();
+  },
+
+  data() {
+    return {
+      propuesta: {},
+      propuestas: []
+    };
+  },
+  methods: {
+    async cargarPropuestas() {
+      let url = config.url_api;
+      const res = await axios.get("http://localhost:3001/api/v1/propuestas");
+      console.log(res);
+    }
+  }
+};
+</script>
