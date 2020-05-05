@@ -15,11 +15,8 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          
           <li>
-            <nuxt-link class="wf" to="/"
-              >Inicio</nuxt-link
-            >
+            <nuxt-link class="wf" to="/">Inicio</nuxt-link>
           </li>
         </ul>
       </div>
@@ -50,8 +47,6 @@
   background-color: white;
 }
 
-
-
 .boton {
   border-radius: 55px 55px 55px 55px;
   -moz-border-radius: 55px 55px 55px 55px;
@@ -59,13 +54,12 @@
   border: 0.5px solid #000000;
 }
 
-.btn-secondary{
+.btn-secondary {
   border-radius: 55px 55px 55px 55px;
   -moz-border-radius: 55px 55px 55px 55px;
   -webkit-border-radius: 55px 55px 55px 55px;
   border: 0.5px solid #000000;
-  background-color:#ba0f16 ;
-  
+  background-color: #ba0f16;
 }
 
 .wf:hover {

@@ -3,20 +3,16 @@
     <b-container>
       <!-- Content here -->
 
-      <b-card class="bcard" title="">
+      <b-card class="bcard" title>
         <b-form>
           <center>
-            <h1>
-              Selecciona una opcion
-            </h1>
-            <p class="mensaje"> esta seleccion es tempoaral y sera remplazada por un login</p>
+            <h1>Selecciona una opcion</h1>
+            <p class="mensaje">esta seleccion es tempoaral y sera remplazada por un login</p>
             <div>
-              <b-button class="botonIndex" href="/gestion"
-                >Proponer Convenios</b-button
-              >
+              <b-button class="botonIndex" href="/propuestas">Proponer Convenios</b-button>
             </div>
             <div>
-              <b-button class="botonIndex" href="/seguimiento">Evaluar Convenios</b-button>
+              <b-button class="botonIndex" href="/evaluaciones">Evaluar Convenios</b-button>
             </div>
           </center>
         </b-form>
@@ -31,10 +27,7 @@
   margin-top: 25px;
 }
 
-.mensaje{
-    color: black
-    ;
+.mensaje {
+  color: black;
 }
-
-
 </style>
