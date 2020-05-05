@@ -32,8 +32,8 @@ export default {
   methods: {
     async cargarPropuestas() {
       try {
-        this.propuestaReducida = [];
-        this.propuestas = [];
+        this.propuestaReducida = Array();
+        this.propuestas = Array();
         let url = config.url_api;
         const res = await axios.get("http://localhost:3001/api/v1/propuestas");
         this.propuestas = res.data;
@@ -54,11 +54,14 @@ export default {
           this.propuestasReducidas.push(propuestaReducida);
           console.log(this.propuestasReducidas);
         }
-
         console.log(this.propuestas);
       } catch (error) {
         console.log(error);
       }
+    },
+
+    recargarPagina() {
+      window.location.replace("http://localhost:3000/propuestas");
     },
 
     async eliminarPropuesta({ item }) {
@@ -69,7 +72,7 @@ export default {
         );
         let propuesta = res.data;
         console.log(propuesta);
-        this.cargarPropuestas();
+        this.recargarPagina();
       } catch (error) {
         console.log(error);
       }
@@ -97,8 +100,8 @@ export default {
           propuesta
         );
         this.limpiarCampos();
+        this.recargarPagina();
         console.log(res);
-        this.cargarPropuestas();
       } catch (error) {
         console.log(error);
       }

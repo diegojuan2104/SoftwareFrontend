@@ -129,7 +129,7 @@
             </b-form-group>
 
             <div class="d-flex justify-content-end">
-              <b-button class="bg-udem boton" type="submit" v-if="!enEdicion">Subir info</b-button>
+              <b-button class="bg-udem boton" type="submit" v-if="!this.enEdicion">Subir info</b-button>
               <b-button
                 clas="bg-udem boton"
                 @click="actualizarPropuesta()"
@@ -143,7 +143,7 @@
       <br />
 
       <b-card class="bcard">
-        <b-table striped hover :items="propuestasReducidas">
+        <b-table striped hover :items="this.propuestasReducidas">
           <template v-slot:cell(Modificar)="row">
             <b-button size="sm" @click="cargarPropuesta(row)" class="bg-udem boton">Modificar</b-button>
           </template>
