@@ -4,13 +4,10 @@
       <!-- Content here -->
 
       <div>
-        <b-card class="bcard" title="">
+        <b-card class="bcard" title>
           <b-form action="javascript:void(0)" @submit="crearPropuesta()">
             <h1>Inscripción propuesta de convenio</h1>
-            <b-form-group
-              label="Nombre de la entidad"
-              label-for="nombreEntidad"
-            >
+            <b-form-group label="Nombre de la entidad" label-for="nombreEntidad">
               <b-form-input
                 class="form-control"
                 type="text"
@@ -120,10 +117,7 @@
               />
             </b-form-group>
 
-            <b-form-group
-              label="Posibles beneficios"
-              label-for="beneificiosConvenio"
-            >
+            <b-form-group label="Posibles beneficios" label-for="beneificiosConvenio">
               <b-form-input
                 class="form-control"
                 type="text"
@@ -134,16 +128,13 @@
               />
             </b-form-group>
 
-            <div class="d-flex justify-content-end ">
-              <b-button class="bg-udem boton" type="submit" v-if="!enEdicion"
-                >Subir info</b-button
-              >
+            <div class="d-flex justify-content-end">
+              <b-button class="bg-udem boton" type="submit" v-if="!enEdicion">Subir info</b-button>
               <b-button
                 clas="bg-udem boton"
                 @click="actualizarPropuesta()"
                 v-else
-                >Actualizar propuesta</b-button
-              >
+              >Actualizar propuesta</b-button>
             </div>
           </b-form>
         </b-card>
@@ -152,22 +143,12 @@
       <br />
 
       <b-card class="bcard">
-        <b-table striped hover :items="listareducida">
+        <b-table striped hover :items="propuestasReducidas">
           <template v-slot:cell(Modificar)="row">
-            <b-button
-              size="sm"
-              @click="cargarPropuesta(row)"
-              class="bg-udem boton"
-              >Modificar</b-button
-            >
+            <b-button size="sm" @click="cargarPropuesta(row)" class="bg-udem boton">Modificar</b-button>
           </template>
           <template v-slot:cell(Eliminar)="row">
-            <b-button
-              size="sm"
-              @click="eliminarPropuesta(row)"
-              class="bg-udem boton"
-              >Eliminar</b-button
-            >
+            <b-button size="sm" @click="eliminarPropuesta(row)" class="bg-udem boton">Eliminar</b-button>
           </template>
         </b-table>
       </b-card>
@@ -175,28 +156,4 @@
   </div>
 </template>
 
-<script src="@/assets/propuestas.js" />
-
-<script>
-import config from "@/assets/config/index";
-import axios from "axios";
-export default {
-  beforeMount() {
-    this.cargarPropuestas();
-  },
-
-  data() {
-    return {
-      propuesta: {},
-      propuestas: []
-    };
-  },
-  methods: {
-    async cargarPropuestas() {
-      let url = config.url_api;
-      const res = await axios.get("http://localhost:3001/api/v1/propuestas");
-      console.log(res);
-    }
-  }
-};
-</script>
+<script src="@/assets/propuestas.js"/>
