@@ -8,20 +8,10 @@
         <br />
         <b-table striped hover :items="listareducida">
           <template v-slot:cell(Modificar)="row">
-            <b-button
-              size="sm"
-              @click="cargarPropuesta(row)"
-              class="bg-udem boton"
-              >ver</b-button
-            >
+            <b-button size="sm" @click="cargarPropuesta(row)" class="bg-udem boton">ver</b-button>
           </template>
           <template v-slot:cell(Eliminar)="row">
-            <b-button
-              size="sm"
-              @click="eliminarPropuesta(row)"
-              class="bg-udem boton"
-              >evaluar</b-button
-            >
+            <b-button size="sm" @click="eliminarPropuesta(row)" class="bg-udem boton">evaluar</b-button>
           </template>
         </b-table>
       </b-card>
@@ -30,10 +20,7 @@
         <h1>Evaluar propuestas</h1>
         <br />
         <b-form action="javascript:void(0)" @submit="crearEvaluacion()">
-          <b-form-group
-            label="Identificacion de la propuesta a evaluar"
-            label-for="nombreEntidad"
-          >
+          <b-form-group label="Identificacion de la propuesta a evaluar" label-for="nombreEntidad">
             <b-form-input
               class="form-control"
               type="number"
@@ -70,25 +57,14 @@
             />
           </b-form-group>
 
-          <b-form-group
-            label="Seleccione el resultado del proceso"
-            label-for="resultado"
-          >
-            <b-form-select
-              id="resultado"
-              v-model="evaluacion.estado"
-              :options="opciones_estado"
-            ></b-form-select>
+          <b-form-group label="Seleccione el resultado del proceso" label-for="resultado">
+            <b-form-select id="resultado" v-model="evaluacion.estado" :options="opciones_estado"></b-form-select>
           </b-form-group>
           <b-form-group>
             <input type="file" @change="processFile($event)" />
           </b-form-group>
-          <b-button class="bg-udem" type="submit" v-if="!enEdicion"
-            >Evaluar</b-button
-          >
-          <b-button @click="actualizarEvaluacion()" variant="primary" v-else
-            >Modificar evaluacion</b-button
-          >
+          <b-button class="bg-udem" type="submit" v-if="!enEdicion">Evaluar</b-button>
+          <b-button @click="actualizarEvaluacion()" variant="primary" v-else>Modificar evaluacion</b-button>
         </b-form>
       </b-card>
 
@@ -97,15 +73,9 @@
         <br />
         <b-table striped hover :items="lista_evaluaciones">
           <template v-slot:cell(acciones)="row">
-            <b-button size="sm" @click="cargarEvaluacion(row)" class="mr-2"
-              >Modificar</b-button
-            >
-            <b-button size="sm" @click="eliminarEvaluacion(row)" class="mr-2"
-              >Eliminar</b-button
-            >
-            <b-button size="sm" @click="generarPDF(row)" class="mr-2"
-              >PDF</b-button
-            >
+            <b-button size="sm" @click="cargarEvaluacion(row)" class="mr-2">Modificar</b-button>
+            <b-button size="sm" @click="eliminarEvaluacion(row)" class="mr-2">Eliminar</b-button>
+            <b-button size="sm" @click="generarPDF(row)" class="mr-2">PDF</b-button>
           </template>
         </b-table>
       </b-card>

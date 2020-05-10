@@ -3,6 +3,7 @@ import axios from "axios";
 export default {
   beforeMount() {
     this.cargarPropuestas();
+    this.cargarEntidades();
   },
 
   data() {
@@ -10,23 +11,36 @@ export default {
       //Propuesta Completa
       propuesta: {
         idPropuesta: "",
-        identificacion: "",
-        nombreEntidad: "",
-        ocupacion: "",
-        nombreCompleto: "",
-        email: "",
         telefono: "",
-        direccion: "",
         tipoConvenio: "",
         iniciativa: "",
         posiblesBeneficios: "",
         estado: ""
       },
       propuestas: [],
+      entidades: [
+        {
+          id: 1,
+          nombre: "Eafit"
+        },
+        {
+          id: 2,
+          nombre: "UPB"
+        }
+      ],
+      entidadesAgregadas: [],
       enEdicion: false,
+      entidadSeleccionada: null,
 
       //Propuesta Reducida
-      propuestasReducidas: []
+      propuestasReducidas: [],
+      entidadesAgregadasReducidas: [],
+      entidadesReducidas: [
+        {
+          value: null,
+          text: "Seleccione una entidad"
+        }
+      ]
     };
   },
   methods: {
@@ -44,17 +58,53 @@ export default {
         for (let i = 0; i < this.propuestas.length; i++) {
           let propuestaReducida = {
             id_Propuesta: this.propuestas[i].idpropuesta,
-            nombreEntidad: this.propuestas[i].nombreentidad,
-            nombre: this.propuestas[i].nombrecompletopersona,
-            email: this.propuestas[i].email,
+            tipo_de_convenio: this.propuestas[i].nombreentidad,
             estadoPropuesta: this.propuestas[i].estadoconvenio,
             Modificar: true,
             Eliminar: true
           };
           this.propuestasReducidas.push(propuestaReducida);
-          console.log(this.propuestasReducidas);
         }
-        console.log(this.propuestas);
+        console.log(this.propuestasReducidas);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    seleccionarEntidad() {
+      if (!this.entidadesAgregadas.includes(this.entidadSeleccionada)) {
+        console.log(this.entidadSeleccionada);
+
+        for (let i = 0; i < this.entidades.length; i++) {
+          console.log(this.entidades[i].id);
+          if (this.entidades[i].id == this.entidadSeleccionada) {
+            let entidadAgregada = {
+              id_Entidad: this.entidades[i].id,
+              Nombre_Entidad: this.entidades[i].nombre,
+              Detalles: true,
+              Eliminar: true
+            };
+            this.entidadesAgregadasReducidas.push(entidadAgregada);
+            this.entidadesAgregadas.push(this.entidadSeleccionada);
+            this.entidadSeleccionada = null;
+            break;
+          }
+        }
+      }
+    },
+
+    cargarEntidades() {
+      //this.entidadesReducidas = Array();
+      try {
+        for (let i = 0; i < this.entidades.length; i++) {
+          let entidadReducida = {
+            text: this.entidades[i].nombre,
+            value: this.entidades[i].id,
+            id: this.entidades[i].id
+          };
+          this.entidadesReducidas.push(entidadReducida);
+        }
+        document.getElementById("entidadSeleccionada").selectedIndex = 0;
       } catch (error) {
         console.log(error);
       }
@@ -78,17 +128,18 @@ export default {
       }
     },
 
+    eliminarEntidad({ item }) {
+      let posicion = this.entidadesAgregadas.findIndex(
+        entidadesAgregada => entidadesAgregada.id == item.id
+      );
+      this.entidadesAgregadas.splice(posicion, 1);
+      this.entidadesAgregadasReducidas.splice(posicion, 1);
+    },
+
     async crearPropuesta() {
       try {
         let propuesta = {
-          identificacion: this.propuesta.identificacion,
-          nombreEntidad: this.propuesta.nombreEntidad,
-          ocupacionPersona: this.propuesta.ocupacion,
-          nombreCompletoPersona: this.propuesta.nombreCompleto,
-          email: this.propuesta.email,
-          ocupacionPersona: this.propuesta.ocupacion,
           telefonoPersona: this.propuesta.telefono,
-          direccionPersona: this.propuesta.direccion,
           tipoConvenio: this.propuesta.tipoConvenio,
           descripcionIniciativa: this.propuesta.iniciativa,
           posiblesBeneficios: this.propuestas.posiblesBeneficios,
@@ -109,11 +160,6 @@ export default {
 
     limpiarCampos() {
       this.propuesta = {
-        nombreEntidad: "",
-        nombreCompleto: "",
-        email: "",
-        telefono: "",
-        direccion: "",
         tipoConvenio: "",
         iniciativa: "",
         posiblesBeneficios: "",

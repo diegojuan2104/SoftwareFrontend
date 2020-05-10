@@ -16,7 +16,7 @@
                   class="form-control"
                   type="text"
                   id="usuario"
-                  placeholder="Ingrese su nombre de usuario"
+                  placeholder="Ingrese su email"
                   v-bind:required="true"
                 />
               </b-form-group>
