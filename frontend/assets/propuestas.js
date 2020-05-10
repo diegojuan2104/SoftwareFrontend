@@ -1,4 +1,3 @@
-import config from "@/assets/config/index";
 import axios from "axios";
 export default {
   beforeMount() {
@@ -48,7 +47,6 @@ export default {
       try {
         this.propuestaReducida = Array();
         this.propuestas = Array();
-        let url = config.url_api;
         const res = await axios.get("http://localhost:3001/api/v1/propuestas");
         this.propuestas = res.data;
         console.log(this.propuestas);
@@ -93,9 +91,12 @@ export default {
       }
     },
 
-    cargarEntidades() {
+    async cargarEntidades() {
       //this.entidadesReducidas = Array();
       try {
+        //const res = await axios.get("http://localhost:3001/api/v1/entidades");
+        //this.entidades = res.data;
+
         for (let i = 0; i < this.entidades.length; i++) {
           let entidadReducida = {
             text: this.entidades[i].nombre,
@@ -139,6 +140,7 @@ export default {
     async crearPropuesta() {
       try {
         let propuesta = {
+          entidades: this.entidadesAgregadas,
           telefonoPersona: this.propuesta.telefono,
           tipoConvenio: this.propuesta.tipoConvenio,
           descripcionIniciativa: this.propuesta.iniciativa,
