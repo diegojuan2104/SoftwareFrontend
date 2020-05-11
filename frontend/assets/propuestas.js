@@ -18,16 +18,7 @@ export default {
         estado: ""
       },
       propuestas: [],
-      entidades: [
-        {
-          id: 1,
-          nombre: "Eafit"
-        },
-        {
-          id: 2,
-          nombre: "UPB"
-        }
-      ],
+      entidades: [],
       //Lista de entidade agregadas temporalmente al registro
       entidadesAgregadas: [],
       //Para modificar un convenio
@@ -62,9 +53,9 @@ export default {
 
         for (let i = 0; i < this.propuestas.length; i++) {
           let propuestaReducida = {
-            id_Propuesta: this.propuestas[i].idpropuesta,
-            tipo_de_convenio: this.propuestas[i].nombreentidad,
-            estadoPropuesta: this.propuestas[i].estadoconvenio,
+            id_Propuesta: this.propuestas[i].id,
+            tipo_de_convenio: this.propuestas[i].tipo_convenio,
+            estadoPropuesta: this.propuestas[i].estado,
             Modificar: true,
             Eliminar: true
           };
@@ -103,8 +94,8 @@ export default {
     async cargarEntidades() {
       //this.entidadesReducidas = Array();
       try {
-        //const res = await axios.get("http://localhost:3001/api/v1/entidades");
-        //this.entidades = res.data;
+        const res = await axios.get("http://localhost:3001/api/v1/entidades");
+        this.entidades = res.data;
 
         for (let i = 0; i < this.entidades.length; i++) {
           let entidadReducida = {

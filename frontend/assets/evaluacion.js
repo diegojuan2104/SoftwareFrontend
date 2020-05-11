@@ -1,106 +1,41 @@
+import axios from "axios";
 export default {
+  beforeMount() {
+    this.cargarPropuestas();
+  },
+
   data() {
     return {
-      evaluacion: {
-        idEvaluacion: "",
-        fecha: "",
-        observaciones: "",
-        estado: "",
-        idPropuesta: "",
-        acciones: true,
-      },
-      propuesta: {
-        idPropuesta: "",
-        identificacion: "",
-        nombreEntidad: "",
-        ocupacion: "",
-        nombreCompleto: "",
-        email: "",
-        telefono: "",
-        direccion: "",
-        tipoConvenio: "",
-        iniciativa: "",
-        posiblesBeneficios: "",
-        estado: ""
-      },
-
-    
-      lista_evaluaciones: [
-      ],
-
-
-      opciones_estado: [
-        { value: "Rechazado", text: "Rechazado" },
-        { value: "Aceptado", text: "Aceptado" },
-        { value: "Incompleto", text: "Incompleto" }
-      ]
+      propuestas: [],
+      propuestasReducidas: []
     };
   },
-
-  mounted() {
-    this.created();
-  },
-
   methods: {
-    created() {
-      let listaObtenida = JSON.parse(localStorage.getItem("ListaEvaluacion"));
-      let lista_propuestas = JSON.parse(localStorage.getItem("Lista"));
-      if (listaObtenida) {
-        this.lista_evaluaciones = listaObtenida
-      } else {
-        this.lista_propuestas = []
-      }
-    },
-
-    crearEvaluacion() {
-      let encontrado = this.lista_evaluaciones.findIndex(
-        evaluacion => evaluacion.idPropuesta == item.idEvaluacion
-      );
-
-      this.evaluacion.idEvaluacion = this.lista_evaluaciones.length + 1;
-      this.lista_evaluaciones.push(this.evaluacion);
-      console.log(this.lista_propuestas)
-      localStorage.setItem("listaEvaluacion", JSON.stringify(this.lista_evaluaciones))
-      this.limpiarCampos()
-    },
-
-    limpiarCampos() {
-
-      this.evaluacion = {
-        idEvaluacion: "",
-        fecha: "",
-        observaciones: "",
-        estado: "",
-        idPropuesta: "",
-        acciones: true,
-      }
-    },
-
-
-    eliminarEvaluacion({ item }) {
-      let posicion = this.lista_evaluaciones.findIndex(
-        evaluacion => evaluacion.idPropuesta == item.idEvaluacion
-      );
-      this.lista_evaluaciones.splice(posicion, 1);
-      localStorage.setItem("listaEvaluacion", JSON.stringify(this.lista_evaluaciones))
-    },
-    cargarEvaluacion({ item }) {
-      let ev = this.lista_evaluaciones.find(
-        evaluacion => evaluacion.idEvaluacion == item.idEvaluacion
-      );
-      this.enEdicion = true;
-      this.evaluacion = Object.assign({}, ev);
-    },
-
-    actualizarEvaluacion() {
-      let posicion = this.lista_evaluaciones.findIndex(
-        x => x.idEvaluacion == this.evaluacion.idEvaluacion
-      );
-      this.lista_evaluaciones.splice(posicion, 1, this.evaluacion);
-      localStorage.setItem("listaEvaluacion", JSON.stringify(this.lista_evaluaciones))
-      
-      this.enEdicion = false
-      this.limpiarCampos()
-    },
+        // Carga las porpuestas en la tabla
+        async cargarPropuestas() {
+          try {
+            this.propuestaReducida = Array();
+            this.propuestas = Array();
+            const res = await axios.get("http://localhost:3001/api/v1/propuestas");
+            this.propuestas = res.data;
+            console.log(this.propuestas);
+    
+            //Se añaden datos a lista reducida pd: No sé porque el foreach no me funcionaba
+    
+            for (let i = 0; i < this.propuestas.length; i++) {
+              let propuestaReducida = {
+                id_Propuesta: this.propuestas[i].id,
+                tipo_de_convenio: this.propuestas[i].tipo_convenio,
+                estadoPropuesta: this.propuestas[i].estado,
+                Modificar: true,
+                Eliminar: true
+              };
+              this.propuestasReducidas.push(propuestaReducida);
+            }
+            console.log(this.propuestasReducidas);
+          } catch (error) {
+            console.log(error);
+          }
+        }
   }
 };
