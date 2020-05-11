@@ -9,17 +9,17 @@
             <h1>LOGIN</h1>
             <p class="mensaje">Iniciar sesion como estudiante o como evaluador</p>
             <div>
-              <b-form-group label="usuario" label-for="usuario">
+              <b-form-group label="Email" label-for="usuario">
                 <b-form-input
                   class="form-control"
                   type="text"
-                  id="correo"
+                  id="email"
                   placeholder="Ingrese su email"
                   v-bind:required="true"
                   v-model="correo"
                 />
               </b-form-group>
-              <b-form-group label="contraseña" label-for="contraseña">
+              <b-form-group label="Contraseña" label-for="contraseña">
                 <b-form-input
                   class="form-control"
                   type="password"

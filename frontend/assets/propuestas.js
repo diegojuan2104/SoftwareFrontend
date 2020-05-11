@@ -1,6 +1,7 @@
 import axios from "axios";
 export default {
   beforeMount() {
+    // Carga las propuestas, falta validar que solo sean las de un usuario en especifico
     this.cargarPropuestas();
     this.cargarEntidades();
   },
@@ -27,13 +28,18 @@ export default {
           nombre: "UPB"
         }
       ],
+      //Lista de entidade agregadas temporalmente al registro
       entidadesAgregadas: [],
+      //Para modificar un convenio
       enEdicion: false,
+      //valor de la entidad seleccionada en determinado instante
       entidadSeleccionada: null,
 
-      //Propuesta Reducida
+      //Lista de la propuesta reducida, para poder visualizarla correctamente en la tabla
       propuestasReducidas: [],
+      //Lista con solo el id y nombre de la entidades seleccionadas,para verla en el combo box o select
       entidadesAgregadasReducidas: [],
+      //Lista de todas las entidades reducidas
       entidadesReducidas: [
         {
           value: null,
@@ -43,6 +49,7 @@ export default {
     };
   },
   methods: {
+    // Carga las porpuestas en la tabla
     async cargarPropuestas() {
       try {
         this.propuestaReducida = Array();
@@ -51,7 +58,7 @@ export default {
         this.propuestas = res.data;
         console.log(this.propuestas);
 
-        //Se añaden datos a lista reducida
+        //Se añaden datos a lista reducida pd: No sé porque el foreach no me funcionaba
 
         for (let i = 0; i < this.propuestas.length; i++) {
           let propuestaReducida = {
@@ -69,6 +76,7 @@ export default {
       }
     },
 
+    //Para seleccionar una entidad y agregarla a la tabla de registro
     seleccionarEntidad() {
       if (!this.entidadesAgregadas.includes(this.entidadSeleccionada)) {
         console.log(this.entidadSeleccionada);
@@ -91,6 +99,7 @@ export default {
       }
     },
 
+    //Carga las entidades ya registradas en la bd
     async cargarEntidades() {
       //this.entidadesReducidas = Array();
       try {
@@ -105,16 +114,16 @@ export default {
           };
           this.entidadesReducidas.push(entidadReducida);
         }
-        document.getElementById("entidadSeleccionada").selectedIndex = 0;
       } catch (error) {
         console.log(error);
       }
     },
-
+    //F5
     recargarPagina() {
       window.location.replace("http://localhost:3000/propuestas");
     },
 
+    //Elimina una propuesta realizada
     async eliminarPropuesta({ item }) {
       try {
         let url = config.url_api;
@@ -129,6 +138,7 @@ export default {
       }
     },
 
+    //Elimina una entidad de la tabla seleccionada
     eliminarEntidad({ item }) {
       let posicion = this.entidadesAgregadas.findIndex(
         entidadesAgregada => entidadesAgregada.id == item.id
@@ -136,7 +146,7 @@ export default {
       this.entidadesAgregadas.splice(posicion, 1);
       this.entidadesAgregadasReducidas.splice(posicion, 1);
     },
-
+    //Crea la propuesta
     async crearPropuesta() {
       try {
         let propuesta = {
