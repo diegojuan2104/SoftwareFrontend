@@ -31,6 +31,11 @@
   margin: 10px;
   font-size: 15px;
 }
+.custom-control-input:checked ~ .custom-control-label::before {
+    color: #fff;
+    border-color: black;
+    background-color: #ba0f16;
+}
 
 .navbar-dark .navbar-brand {
   color: white;
