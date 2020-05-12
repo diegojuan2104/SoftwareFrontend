@@ -35,7 +35,7 @@
               <b-card>
                 <b-table striped hover :items="this.entidadesAgregadasReducidas">
                   <template v-slot:cell(Detalles)="row">
-                    <b-button size="sm" @click="cargarEntidades(row)" class="bg-udem boton">Detalles</b-button>
+                    <b-button size="sm" @click="detallesPropuesta(row)" class="bg-udem boton">Detalles</b-button>
                   </template>
                   <template v-slot:cell(Eliminar)="row">
                     <b-button size="sm" @click="eliminarEntidad(row)" class="bg-udem boton">Eliminar</b-button>

@@ -1,28 +1,29 @@
 import axios from "axios";
 export default {
   beforeMount() {
-    this.cargarPropuestas();
-    this.cargarEntidades();
+    sessionStorage.setItem("token", "");  
   },
 
   data() {
     return {
       correo: "",
-      contrasena: ""
+      clave: "",
+      idUsuario
     };
   },
   methods: {
-    async login() {
+    async iniciarSesion() {
       try {
         let log = {
           correo: this.correo,
-          contrasena: this.contrasena
+          clave: this.clave
         };
-        let res = await axios.post(
-          "http://localhost:3001/api/v1/propuestas",
-          log
-        );
+        let res = await axios.post("http://localhost:3001/api/v1/login", log);
         console.log(res);
+        const token = res.data.info;
+        sessionStorage.setItem("token", token);
+        //axios.defaults.headers.common["Authorization"] = token;
+        window.location.replace("http://localhost:3000/propuestas");
       } catch (error) {
         console.log(error);
       }

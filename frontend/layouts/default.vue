@@ -25,6 +25,14 @@
   </div>
 </template>
 
+
+<script>
+import axios from "axios";
+export default {
+  async beforeMount() {}
+};
+</script>
+
 <style>
 .wf {
   color: #ffffff;

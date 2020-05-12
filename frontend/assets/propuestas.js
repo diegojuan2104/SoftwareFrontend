@@ -43,11 +43,13 @@ export default {
     // Carga las porpuestas en la tabla
     async cargarPropuestas() {
       try {
-        this.propuestaReducida = Array();
-        this.propuestas = Array();
-        const res = await axios.get("http://localhost:3001/api/v1/propuestas");
+        this.propuestaReducida = []
+        this.propuestas = []
+        let token = sessionStorage.getItem("token");
+        const res = await axios.get("http://localhost:3001/api/v1/propuestas", {
+          headers: { token }
+        });
         this.propuestas = res.data;
-        console.log(this.propuestas);
 
         //Se añaden datos a lista reducida pd: No sé porque el foreach no me funcionaba
 
@@ -61,17 +63,15 @@ export default {
           };
           this.propuestasReducidas.push(propuestaReducida);
         }
-        console.log(this.propuestasReducidas);
       } catch (error) {
         console.log(error);
+        window.location.replace("http://localhost:3000/error");
       }
     },
 
     //Para seleccionar una entidad y agregarla a la tabla de registro
     seleccionarEntidad() {
       if (!this.entidadesAgregadas.includes(this.entidadSeleccionada)) {
-        console.log(this.entidadSeleccionada);
-
         for (let i = 0; i < this.entidades.length; i++) {
           console.log(this.entidades[i].id);
           if (this.entidades[i].id == this.entidadSeleccionada) {
@@ -94,7 +94,10 @@ export default {
     async cargarEntidades() {
       //this.entidadesReducidas = Array();
       try {
-        const res = await axios.get("http://localhost:3001/api/v1/entidades");
+        let token = sessionStorage.getItem("token");
+        const res = await axios.get("http://localhost:3001/api/v1/entidades", {
+          headers: { token }
+        });
         this.entidades = res.data;
 
         for (let i = 0; i < this.entidades.length; i++) {
@@ -114,15 +117,19 @@ export default {
       window.location.replace("http://localhost:3000/propuestas");
     },
 
+    token() {
+      let token = sessionStorage.getItem("token");
+      return token;
+    },
     //Elimina una propuesta realizada
     async eliminarPropuesta({ item }) {
       try {
-        let url = config.url_api;
+        let token = sessionStorage.getItem("token");
         const res = await axios.delete(
-          "http://localhost:3001/api/v1/propuestas/" + item.id_Propuesta
+          "http://localhost:3001/api/v1/propuestas/" + item.id_Propuesta,
+          { headers: { token } }
         );
         let propuesta = res.data;
-        console.log(propuesta);
         this.recargarPagina();
       } catch (error) {
         console.log(error);
@@ -140,22 +147,25 @@ export default {
     //Crea la propuesta
     async crearPropuesta() {
       try {
+        let token = this.token();
         let propuesta = {
-          entidades: this.entidadesAgregadas,
-          telefonoPersona: this.propuesta.telefono,
+          infoContacto: this.propuesta.telefono,
           tipoConvenio: this.propuesta.tipoConvenio,
           descripcionIniciativa: this.propuesta.iniciativa,
-          posiblesBeneficios: this.propuestas.posiblesBeneficios,
-          estadoConvenio: "Etapa de Revisión"
+          beneficios: this.propuesta.posiblesBeneficios,
+          estado: "Etapa de Revisión"
         };
 
-        let res = await axios.post(
+        let res1 = await axios.post(
           "http://localhost:3001/api/v1/propuestas",
-          propuesta
+          propuesta,
+          { headers: { token } }
         );
+
+        console.log(res1.data.id);
+        this.cargarPropuestas();
         this.limpiarCampos();
-        this.recargarPagina();
-        console.log(res);
+        // this.recargarPagina();
       } catch (error) {
         console.log(error);
       }

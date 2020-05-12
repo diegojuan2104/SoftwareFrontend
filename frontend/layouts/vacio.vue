@@ -4,7 +4,7 @@
       <!-- Content here -->
 
       <b-card class="bcard" title>
-        <b-form>
+        <b-form action="javascript:void(0)" @submit="iniciarSesion()">
           <center>
             <h1>LOGIN</h1>
             <p class="mensaje">Iniciar sesion como estudiante o como evaluador</p>
@@ -13,7 +13,7 @@
                 <b-form-input
                   class="form-control"
                   type="text"
-                  id="email"
+                  id="correo"
                   placeholder="Ingrese su email"
                   v-bind:required="true"
                   v-model="correo"
@@ -23,13 +23,13 @@
                 <b-form-input
                   class="form-control"
                   type="password"
-                  id="contrasena"
+                  id="clave"
                   placeholder="Ingrese la contraseña"
                   v-bind:required="true"
-                  v-model="contrasena"
+                  v-model="clave"
                 />
               </b-form-group>
-              <b-button class="botonIndex" href="/propuestas">Iniciar Sesion</b-button>
+              <b-button class="bg-udem boton" type="submit" v-if="!this.enEdicion">Iniciar Sesión</b-button>
 
               <div>
                 <b-button class="botonIndex" href="/propuestas">Proponer Convenios</b-button>
