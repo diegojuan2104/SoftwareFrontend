@@ -2,6 +2,7 @@ import axios from "axios";
 export default {
   beforeMount() {
     this.cargarPropuestas();
+    this.cargarTareas();
   },
 
   data() {
@@ -39,7 +40,7 @@ export default {
         console.log(error);
       }
     },
-    async cargarPropuestas() {
+    async cargarTareas() {
       try {
         this.tareasReducidas = Array();
         this.tareas = Array();
