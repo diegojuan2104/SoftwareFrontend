@@ -8,7 +8,6 @@ export default {
     return {
       correo: "",
       clave: "",
-      idUsuario
     };
   },
   methods: {
