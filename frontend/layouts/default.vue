@@ -26,6 +26,8 @@
 </template>
 
 <style>
+
+
 .wf {
   color: #ffffff;
   margin: 10px;

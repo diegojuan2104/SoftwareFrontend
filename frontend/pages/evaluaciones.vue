@@ -34,10 +34,9 @@
           <template v-slot:cell(comentario)>
             <b-form-textarea
                 id="comentarioTarea"
-                v-model="text"
                 placeholder="Ingrese Comentario..."
                 rows="3"
-                max-rows="4"
+                max-rows="3"
     ></b-form-textarea>
 
           </template>
