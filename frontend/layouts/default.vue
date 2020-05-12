@@ -14,13 +14,17 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li>
-            <nuxt-link class="wf mr-sm-2" to="/">Cerrar Sesion</nuxt-link>
+        <ul class="navbar-nav ml-auto">
+          <li >
+            <nuxt-link class="wf " to="/">Cerrar Sesion</nuxt-link>
           </li>
+
+
+
         </ul>
       </div>
     </nav>
+
     <nuxt />
   </div>
 </template>
