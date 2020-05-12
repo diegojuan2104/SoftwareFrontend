@@ -3,6 +3,7 @@ export default {
   beforeMount() {
     this.cargarPropuestas();
     this.cargarTareas();
+    
   },
 
   data() {
@@ -10,7 +11,8 @@ export default {
       propuestas: [],
       propuestasReducidas: [],
       tareas: [],
-      tareasReducidas: []
+      tareasReducidas: [],
+      enEvaluacion:false
     };
   },
   methods: {
@@ -64,6 +66,11 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+
+    cargarTareasPropuesta(id){
+
+      this.enEvaluacion=true;
     }
 
 

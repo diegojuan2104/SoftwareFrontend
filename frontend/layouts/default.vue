@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-udem">
-      <a class="navbar-brand" href="#">Gestión de Convenios</a>
+      <a class="navbar-brand" href="#">Gestión de propuestas de convenio</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -16,7 +16,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li>
-            <nuxt-link class="wf" to="/">Inicio</nuxt-link>
+            <nuxt-link class="wf mr-sm-2" to="/">Cerrar Sesion</nuxt-link>
           </li>
         </ul>
       </div>
