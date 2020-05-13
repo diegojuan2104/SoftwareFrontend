@@ -15,12 +15,9 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
-          <li >
+          <li>
             <nuxt-link class="wf " to="/">Cerrar Sesion</nuxt-link>
           </li>
-
-
-
         </ul>
       </div>
     </nav>
@@ -28,7 +25,6 @@
     <nuxt />
   </div>
 </template>
-
 
 <script>
 import axios from "axios";
@@ -38,23 +34,28 @@ export default {
 </script>
 
 <style>
-
-
 .wf {
   color: #ffffff;
   margin: 10px;
   font-size: 15px;
 }
 .custom-control-input:checked ~ .custom-control-label::before {
-    color: #fff;
-    border-color: black;
-    background-color: #ba0f16;
+  color: #fff;
+  border-color: black;
+  background-color: #ba0f16;
 }
 
 .navbar-dark .navbar-brand {
   color: white;
   font-size: 25px;
   font-weight: bold;
+}
+.btn-primary {
+  border-radius: 55px 55px 55px 55px;
+  -moz-border-radius: 55px 55px 55px 55px;
+  -webkit-border-radius: 55px 55px 55px 55px;
+  border: 0.5px solid #000000;
+  background-color: #ba0f16;
 }
 
 .btn-secondary:hover {

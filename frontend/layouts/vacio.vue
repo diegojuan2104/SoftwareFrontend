@@ -29,7 +29,7 @@
                   v-model="clave"
                 />
               </b-form-group>
-              <b-button class="bg-udem boton" type="submit" v-if="!this.enEdicion">Iniciar Sesión</b-button>
+              <b-button class="bg-udem boton" type="submit" >Iniciar Sesión</b-button>
 
               <div>
                 <b-button class="botonIndex" href="/propuestas">Proponer Convenios</b-button>

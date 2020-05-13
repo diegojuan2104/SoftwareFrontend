@@ -8,6 +8,7 @@ export default {
 
   data() {
     return {
+      modalShow: false,
       propuestas: [],
       propuestasReducidas: [],
       tareas: [],
@@ -33,7 +34,7 @@ export default {
             tipo_de_convenio: this.propuestas[i].tipo_convenio,
             estadoPropuesta: this.propuestas[i].estado,
             Detalles: true,
-            Eliminar: true
+            evaluar: true
           };
           this.propuestasReducidas.push(propuestaReducida);
         }
@@ -55,10 +56,11 @@ export default {
         for (let i = 0; i < this.tareas.length; i++) {
           let tareasReducida = {
             nombre_tarea: this.tareas[i].nombre,
-            detalles: true,    //boton
-            aprobacion: true,    //check
-            pdf: true,   //boton pdf
-            comentario: true  //campo de texto
+            descripcion: true,
+            aprobacion: true,   
+            pdf: true,  
+            comentario: true,
+            evaluar:true
           };
           this.tareasReducidas.push(tareasReducida);
         }
@@ -71,6 +73,11 @@ export default {
     cargarTareasPropuesta(id){
 
       this.enEvaluacion=true;
+    },
+
+    detallesTarea(i){
+
+
     }
 
 
