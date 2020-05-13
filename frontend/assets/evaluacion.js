@@ -13,7 +13,7 @@ export default {
       propuestasReducidas: [],
       tareas: [],
       tareasReducidas: [],
-      enEvaluacion:false
+      enEvaluacion:false,
     };
   },
   methods: {
@@ -55,6 +55,7 @@ export default {
 
         for (let i = 0; i < this.tareas.length; i++) {
           let tareasReducida = {
+            id:this.tareas[i].id,
             nombre_tarea: this.tareas[i].nombre,
             descripcion: true,
             aprobacion: true,   
@@ -70,13 +71,17 @@ export default {
       }
     },
 
-    cargarTareasPropuesta(id){
+    cargarTareasPropuesta(i){
 
       this.enEvaluacion=true;
+      console.log(i)
+
     },
 
-    detallesTarea(i){
-
+    detallesTarea({id}){
+        
+      console.log(id) ;
+      
 
     }
 

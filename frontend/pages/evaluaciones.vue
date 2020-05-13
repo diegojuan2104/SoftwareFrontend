@@ -14,28 +14,29 @@
             >Detalles</b-button
           >
         </template>
+
+
         <template v-slot:cell(evaluar)="row">
           <b-button
             size="sm"
             @click="cargarTareasPropuesta(row)"
             class="bg-udem boton"
-            >Evaluar</b-button
-          >
+            >Evaluar</b-button>
         </template>
       </b-table>
     </b-card>
 
-    <b-card class="bcard" id="tablaTareas;" v-if="this.enEvaluacion">
-      <h1 id="tituloTareas">Tareas:</h1>
+    <b-card class="bcard"  v-if="this.enEvaluacion">
+      <h1>Tareas:</h1>
       <br />
       <b-table striped hover :items="tareasReducidas">
-        <template v-slot:cell(descripcion)>
+        
+        <template v-slot:cell(descripcion)="row">
           <b-button
             size="sm"
-            classs="bg-udem boton"
-            @click="modalShow = !modalShow"
-            >Detalles</b-button
-          >
+            class="bg-udem boton"
+            @click="detallesTarea(row),modalShow=!modalShow"
+            >Detalles</b-button>
 
           <b-modal v-model="modalShow"></b-modal>
         </template>
