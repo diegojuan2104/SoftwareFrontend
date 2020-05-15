@@ -1,13 +1,13 @@
 import axios from "axios";
 export default {
   beforeMount() {
-    sessionStorage.setItem("token", "");  
+    sessionStorage.setItem("token", "");
   },
 
   data() {
     return {
       correo: "",
-      clave: "",
+      clave: ""
     };
   },
   methods: {
@@ -20,8 +20,13 @@ export default {
         let res = await axios.post("http://localhost:3001/api/v1/login", log);
         console.log(res);
         const token = res.data.info;
+        const user = res.data.usuario.id;
+        const userRol = res.data.usuario.rol;
+        console.log(user);
+        console.log(userRol);
+
         sessionStorage.setItem("token", token);
-        //axios.defaults.headers.common["Authorization"] = token;
+        axios.defaults.headers.common["Authorization"] = token;
         window.location.replace("http://localhost:3000/propuestas");
       } catch (error) {
         console.log(error);

@@ -1,7 +1,7 @@
 import axios from "axios";
 export default {
   beforeMount() {
-    // Carga las propuestas, falta validar que solo sean las de un usuario en especifico
+    // Carga las propuestas,PENDIENTE falta validar que solo sean las de un usuario en especifico
     this.cargarPropuestas();
     this.cargarEntidades();
   },
@@ -43,8 +43,6 @@ export default {
     // Carga las porpuestas en la tabla
     async cargarPropuestas() {
       try {
-        this.propuestaReducida = []
-        this.propuestas = []
         let token = sessionStorage.getItem("token");
         const res = await axios.get("http://localhost:3001/api/v1/propuestas", {
           headers: { token }
@@ -63,9 +61,11 @@ export default {
           };
           this.propuestasReducidas.push(propuestaReducida);
         }
+
+        this.$refs.tablaPropuestas.refresh();
       } catch (error) {
         console.log(error);
-        window.location.replace("http://localhost:3000/error");
+        //window.location.replace("http://localhost:3000/error");
       }
     },
 
@@ -129,8 +129,8 @@ export default {
           "http://localhost:3001/api/v1/propuestas/" + item.id_Propuesta,
           { headers: { token } }
         );
-        let propuesta = res.data;
-        this.recargarPagina();
+        this.propuestasReducidas = [];
+        this.cargarPropuestas();
       } catch (error) {
         console.log(error);
       }
@@ -145,7 +145,7 @@ export default {
       this.entidadesAgregadasReducidas.splice(posicion, 1);
     },
     //Crea la propuesta
-    async crearPropuesta() {
+    crearPropuesta() {
       try {
         let token = this.token();
         let propuesta = {
@@ -156,16 +156,15 @@ export default {
           estado: "Etapa de Revisión"
         };
 
-        let res1 = await axios.post(
-          "http://localhost:3001/api/v1/propuestas",
-          propuesta,
-          { headers: { token } }
-        );
-
-        console.log(res1.data.id);
-        this.cargarPropuestas();
-        this.limpiarCampos();
-        // this.recargarPagina();
+        axios
+          .post("http://localhost:3001/api/v1/propuestas", propuesta, {
+            headers: { token }
+          })
+          .then(res => {
+            console.log(res.data.id);
+            this.limpiarCampos();
+            this.cargarPropuestas();
+          });
       } catch (error) {
         console.log(error);
       }
@@ -178,6 +177,8 @@ export default {
         posiblesBeneficios: "",
         estado: ""
       };
+      this.propuestasReducidas = [];
+      this.entidadesAgregadasReducidas = [];
     }
   }
 };

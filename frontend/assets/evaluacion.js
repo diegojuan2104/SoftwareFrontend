@@ -43,9 +43,10 @@ export default {
         console.log(error);
       }
     },
+    
     async cargarTareas() {
       try {
-        this.tareasReducidas = Array();
+     
         this.tareas = Array();
         const res = await axios.get("http://localhost:3001/api/v1/tareas");
         this.tareas = res.data;

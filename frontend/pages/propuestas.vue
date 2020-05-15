@@ -33,7 +33,7 @@
 
               <h4>Lista de entidades involucradas</h4>
               <b-card>
-                <b-table striped hover :items="this.entidadesAgregadasReducidas">
+                <b-table ref="tablaEntidadesAgre" striped hover :items="this.entidadesAgregadasReducidas">
                   <template v-slot:cell(Detalles)="row">
                     <b-button size="sm" @click="detallesPropuesta(row)" class="bg-udem boton">Detalles</b-button>
                   </template>
@@ -55,7 +55,7 @@
             </b-form-group>
 
             <b-form-group label="Descripción de la iniciativa" label-for="razonConvenio">
-              <b-form-input
+              <b-form-textarea
                 class="form-control"
                 type="text"
                 id="razonConvenio"
@@ -66,7 +66,7 @@
             </b-form-group>
 
             <b-form-group label="Posibles beneficios" label-for="beneificiosConvenio">
-              <b-form-input
+              <b-form-textarea
                 class="form-control"
                 type="text"
                 id="beneficiosConvenio"
@@ -89,7 +89,7 @@
       </div>
       <b-card class="bcard">
         <h3>Propuestas Realizadas</h3>
-        <b-table striped hover :items="this.propuestasReducidas">
+        <b-table ref="tablaPropuestas" striped hover :items="this.propuestasReducidas">
           <template v-slot:cell(Modificar)="row">
             <b-button size="sm" @click="cargarPropuesta(row)" class="bg-udem boton">Modificar</b-button>
           </template>
