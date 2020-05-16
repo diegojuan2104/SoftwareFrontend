@@ -3,7 +3,6 @@ export default {
   beforeMount() {
     this.cargarPropuestas();
     this.cargarTareas();
-    
   },
 
   data() {
@@ -13,16 +12,23 @@ export default {
       propuestasReducidas: [],
       tareas: [],
       tareasReducidas: [],
-      enEvaluacion:false,
+      enEvaluacion: false
     };
   },
   methods: {
+    token() {
+      let token = sessionStorage.getItem("token");
+      return token;
+    },
     // Carga las porpuestas en la tabla
     async cargarPropuestas() {
       try {
+        const token = this.token();
         this.propuestaReducida = Array();
         this.propuestas = Array();
-        const res = await axios.get("http://localhost:3001/api/v1/propuestas");
+        const res = await axios.get("http://localhost:3001/api/v1/propuestas", {
+          headers: { token }
+        });
         this.propuestas = res.data;
         console.log(this.propuestas);
 
@@ -43,12 +49,14 @@ export default {
         console.log(error);
       }
     },
-    
+
     async cargarTareas() {
       try {
-     
+        const token = this.token();
         this.tareas = Array();
-        const res = await axios.get("http://localhost:3001/api/v1/tareas");
+        const res = await axios.get("http://localhost:3001/api/v1/tareas", {
+          headers: { token }
+        });
         this.tareas = res.data;
         console.log(this.tareas);
 
@@ -56,13 +64,13 @@ export default {
 
         for (let i = 0; i < this.tareas.length; i++) {
           let tareasReducida = {
-            id:this.tareas[i].id,
+            id: this.tareas[i].id,
             nombre_tarea: this.tareas[i].nombre,
             descripcion: true,
-            aprobacion: true,   
-            pdf: true,  
+            aprobacion: true,
+            pdf: true,
             comentario: true,
-            evaluar:true
+            evaluar: true
           };
           this.tareasReducidas.push(tareasReducida);
         }
@@ -72,19 +80,13 @@ export default {
       }
     },
 
-    cargarTareasPropuesta(i){
-
-      this.enEvaluacion=true;
-      console.log(i)
-
+    cargarTareasPropuesta(i) {
+      this.enEvaluacion = true;
+      console.log(i);
     },
 
-    detallesTarea({item}){
-       
-      console.log(item) ;
-      
+    detallesTarea({ item }) {
+      console.log(item);
     }
-
-
   }
 };

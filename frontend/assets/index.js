@@ -1,6 +1,8 @@
 import axios from "axios";
 export default {
   beforeMount() {
+    sessionStorage.setItem("idUser", "");
+    sessionStorage.setItem("userRol", "");
     sessionStorage.setItem("token", "");
   },
 
@@ -28,7 +30,11 @@ export default {
         sessionStorage.setItem("userRol", userRol);
         sessionStorage.setItem("token", token);
         axios.defaults.headers.common["Authorization"] = token;
-        window.location.replace("http://localhost:3000/propuestas");
+        if (userRol == 2) {
+          window.location.replace("http://localhost:3000/evaluaciones");
+        } else {
+          window.location.replace("http://localhost:3000/propuestas");
+        }
       } catch (error) {
         console.log(error);
       }

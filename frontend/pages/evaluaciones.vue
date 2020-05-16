@@ -19,14 +19,33 @@
     <b-card class="bcard" v-if="this.enEvaluacion">
       <h1>Tareas:</h1>
       <br />
-
       <b-table striped hover :items="tareasReducidas">
         <template v-slot:cell(descripcion)="fila">
           <b-button size="sm" class="bg-udem boton" @click="detallesTarea(fila)">Detalles</b-button>
+        </template>
+        <template v-slot:cell(aprobacion)>
+          <b-form-checkbox size="lg" name="check-button" switch></b-form-checkbox>
+        </template>
+        <template v-slot:cell(pdf)>
+          <b-form-file class="mt-3" plain></b-form-file>
+        </template>
+        <template v-slot:cell(comentario)>
+          <b-form-textarea
+            id="comentarioTarea"
+            placeholder="Ingrese Comentario..."
+            rows="3"
+            max-rows="3"
+          ></b-form-textarea>
+        </template>
+        <template v-slot:cell(evaluar)="evaluar">
+          <b-button size="sm" class="bg-udem boton" @click="detallesTarea(evaluar)">Evaluar</b-button>
         </template>
       </b-table>
     </b-card>
   </div>
 </template>
+
+
+
 
 <script src="@/assets/evaluacion.js" />
