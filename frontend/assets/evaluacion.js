@@ -89,15 +89,11 @@ export default {
     },
 
     detallesTarea({ item }) {
-      console.log(item.id);
-      console.log(this.tareas[item.id])
 
-      this.idTarea=this.tareas[item.id].id
-      this.nombreTarea=this.tareas[item.id].nombre
-      this.descripcionTarea=this.tareas[item.id].descripcion
-
-
-
+      let pos=parseInt(item.id, 10)-1;
+      this.idTarea=this.tareas[pos].id
+      this.nombreTarea=this.tareas[pos].nombre
+      this.descripcionTarea=this.tareas[pos].descripcion
     }
   }
 };
