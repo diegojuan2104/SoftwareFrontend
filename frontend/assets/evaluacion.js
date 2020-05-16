@@ -7,6 +7,9 @@ export default {
 
   data() {
     return {
+      idTarea:"",
+      nombreTarea:"",
+      descripcionTarea:"",
       modalShow: false,
       propuestas: [],
       propuestasReducidas: [],
@@ -86,7 +89,15 @@ export default {
     },
 
     detallesTarea({ item }) {
-      console.log(item);
+      console.log(item.id);
+      console.log(this.tareas[item.id])
+
+      this.idTarea=this.tareas[item.id].id
+      this.nombreTarea=this.tareas[item.id].nombre
+      this.descripcionTarea=this.tareas[item.id].descripcion
+
+
+
     }
   }
 };
