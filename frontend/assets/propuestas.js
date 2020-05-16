@@ -43,10 +43,14 @@ export default {
     // Carga las porpuestas en la tabla
     async cargarPropuestas() {
       try {
+        let idUser = sessionStorage.getItem("idUser");
         let token = sessionStorage.getItem("token");
-        const res = await axios.get("http://localhost:3001/api/v1/propuestas", {
-          headers: { token }
-        });
+        const res = await axios.get(
+          "http://localhost:3001/api/v1/propuestasUsuarios/" + idUser,
+          {
+            headers: { token }
+          }
+        );
         this.propuestas = res.data;
 
         //Se añaden datos a lista reducida pd: No sé porque el foreach no me funcionaba
@@ -62,10 +66,11 @@ export default {
           this.propuestasReducidas.push(propuestaReducida);
         }
 
-        this.$refs.tablaPropuestas.refresh();
+        console.log(this.propuestasReducidas);
+        console.log(this.propuestas);
       } catch (error) {
         console.log(error);
-        //window.location.replace("http://localhost:3000/error");
+        window.location.replace("http://localhost:3000/error");
       }
     },
 
@@ -73,7 +78,6 @@ export default {
     seleccionarEntidad() {
       if (!this.entidadesAgregadas.includes(this.entidadSeleccionada)) {
         for (let i = 0; i < this.entidades.length; i++) {
-          console.log(this.entidades[i].id);
           if (this.entidades[i].id == this.entidadSeleccionada) {
             let entidadAgregada = {
               id_Entidad: this.entidades[i].id,
@@ -125,10 +129,19 @@ export default {
     async eliminarPropuesta({ item }) {
       try {
         let token = sessionStorage.getItem("token");
-        const res = await axios.delete(
+        const propuestaEliminada = await axios.delete(
           "http://localhost:3001/api/v1/propuestas/" + item.id_Propuesta,
           { headers: { token } }
         );
+        //Elimina los involucrados relacionados
+        const res = await axios.delete(
+          "http://localhost:3001/api/v1/involucrados/" + item.id_Propuesta,
+          { headers: { token } }
+        );
+
+        console.log(res);
+
+        this.propuestas = [];
         this.propuestasReducidas = [];
         this.cargarPropuestas();
       } catch (error) {
@@ -175,7 +188,7 @@ export default {
                 headers: { token }
               })
               .then(res => {
-                this.limpiarCampos();
+                this.limpiarCampos()
                 this.cargarPropuestas();
                 console.log(res);
               });
@@ -192,6 +205,7 @@ export default {
         posiblesBeneficios: "",
         estado: ""
       };
+      this.oriouestas = [];
       this.propuestasReducidas = [];
       this.entidadesAgregadasReducidas = [];
       this.entidadesAgregadas = [];
