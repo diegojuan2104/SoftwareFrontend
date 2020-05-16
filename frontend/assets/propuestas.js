@@ -57,9 +57,9 @@ export default {
 
         for (let i = 0; i < this.propuestas.length; i++) {
           let propuestaReducida = {
-            id_Propuesta: this.propuestas[i].id,
+            id: this.propuestas[i].id,
             tipo_de_convenio: this.propuestas[i].tipo_convenio,
-            estadoPropuesta: this.propuestas[i].estado,
+            Estado: this.propuestas[i].estado,
             Modificar: true,
             Eliminar: true
           };
@@ -98,6 +98,8 @@ export default {
     async cargarEntidades() {
       //this.entidadesReducidas = Array();
       try {
+        this.prouestas = [];
+        this.propuestasReducidas = [];
         let token = sessionStorage.getItem("token");
         const res = await axios.get("http://localhost:3001/api/v1/entidades", {
           headers: { token }
@@ -130,20 +132,25 @@ export default {
       try {
         let token = sessionStorage.getItem("token");
         const propuestaEliminada = await axios.delete(
-          "http://localhost:3001/api/v1/propuestas/" + item.id_Propuesta,
+          "http://localhost:3001/api/v1/propuestas/" + item.id,
           { headers: { token } }
         );
         //Elimina los involucrados relacionados
         const res = await axios.delete(
-          "http://localhost:3001/api/v1/involucrados/" + item.id_Propuesta,
+          "http://localhost:3001/api/v1/involucrados/" + item.id,
           { headers: { token } }
         );
 
-        console.log(res);
+        let posicion1 = this.propuestas.findIndex(
+          propuesta => propuesta.id == item.id_Propuesta
+        );
+        let posicion2 = this.propuestasReducidas.findIndex(
+          propuestaReducida => propuestaReducida.id == item.id_Propuesta
+        );
+        this.propuestasReducidas.splice(posicion1, 1);
+        this.entidadesAgregadasReducidas.splice(posicion2, 1);
 
-        this.propuestas = [];
-        this.propuestasReducidas = [];
-        this.cargarPropuestas();
+        console.log(res);
       } catch (error) {
         console.log(error);
       }
@@ -177,6 +184,14 @@ export default {
             console.log(res);
             const idPropuestaCreada = res.data.id.id;
 
+            let propuestaReducida = {
+              id: idPropuestaCreada,
+              tipo_de_convenio: propuesta.tipoConvenio,
+              Estado: propuesta.estado,
+              Modificar: true,
+              Eliminar: true
+            };
+
             const involucrados = {
               idUsuario: sessionStorage.getItem("idUser"),
               entidades: this.entidadesAgregadas,
@@ -188,8 +203,9 @@ export default {
                 headers: { token }
               })
               .then(res => {
-                this.limpiarCampos()
-                this.cargarPropuestas();
+                this.limpiarCampos();
+                this.propuestasReducidas.push(propuestaReducida);
+                this.propuestas.push(propuesta);
                 console.log(res);
               });
           });
@@ -205,8 +221,6 @@ export default {
         posiblesBeneficios: "",
         estado: ""
       };
-      this.oriouestas = [];
-      this.propuestasReducidas = [];
       this.entidadesAgregadasReducidas = [];
       this.entidadesAgregadas = [];
     }

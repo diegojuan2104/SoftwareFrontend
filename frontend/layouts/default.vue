@@ -16,7 +16,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
           <li>
-            <nuxt-link class="wf " to="/">Cerrar Sesion</nuxt-link>
+            <nuxt-link class="wf" to="/">Cerrar Sesion</nuxt-link>
           </li>
         </ul>
       </div>

@@ -29,14 +29,7 @@
                   v-model="clave"
                 />
               </b-form-group>
-              <b-button class="bg-udem boton" type="submit" >Iniciar Sesión</b-button>
-
-              <div>
-                <b-button class="botonIndex" href="/propuestas">Proponer Convenios</b-button>
-              </div>
-            </div>
-            <div>
-              <b-button class="botonIndex" href="/evaluaciones">Evaluar Convenios</b-button>
+              <b-button class="bg-udem boton" type="submit">Iniciar Sesión</b-button>
             </div>
           </center>
         </b-form>
