@@ -79,11 +79,10 @@ export default {
 
     },
 
-    detallesTarea({id}){
-        
-      console.log(id) ;
+    detallesTarea({item}){
+       
+      console.log(item) ;
       
-
     }
 
 

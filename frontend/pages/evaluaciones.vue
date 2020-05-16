@@ -21,8 +21,8 @@
       <br />
 
       <b-table striped hover :items="tareasReducidas">
-        <template v-slot:cell(descripcion)="row">
-          <b-button size="sm" class="bg-udem boton" @click="detallesTarea(row)">Detalles</b-button>
+        <template v-slot:cell(descripcion)="fila">
+          <b-button size="sm" class="bg-udem boton" @click="detallesTarea(fila)">Detalles</b-button>
         </template>
       </b-table>
     </b-card>

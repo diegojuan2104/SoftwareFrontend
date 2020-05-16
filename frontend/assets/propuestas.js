@@ -161,9 +161,24 @@ export default {
             headers: { token }
           })
           .then(res => {
-            console.log(res.data.id);
-            this.limpiarCampos();
-            this.cargarPropuestas();
+            console.log(res);
+            const idPropuestaCreada = res.data.id.id;
+
+            const involucrados = {
+              idUsuario: sessionStorage.getItem("idUser"),
+              entidades: this.entidadesAgregadas,
+              idPropuesta: idPropuestaCreada
+            };
+            console.log(involucrados);
+            axios
+              .post("http://localhost:3001/api/v1/involucrados", involucrados, {
+                headers: { token }
+              })
+              .then(res => {
+                this.limpiarCampos();
+                this.cargarPropuestas();
+                console.log(res);
+              });
           });
       } catch (error) {
         console.log(error);
@@ -179,6 +194,7 @@ export default {
       };
       this.propuestasReducidas = [];
       this.entidadesAgregadasReducidas = [];
+      this.entidadesAgregadas = [];
     }
   }
 };

@@ -24,7 +24,8 @@ export default {
         const userRol = res.data.usuario.rol;
         console.log(user);
         console.log(userRol);
-
+        sessionStorage.setItem("idUser", user);
+        sessionStorage.setItem("userRol", userRol);
         sessionStorage.setItem("token", token);
         axios.defaults.headers.common["Authorization"] = token;
         window.location.replace("http://localhost:3000/propuestas");
