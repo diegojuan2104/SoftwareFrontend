@@ -25,8 +25,8 @@
       <p class="my-4">Nombre: {{ nombreCompletoProp }}</p>
       <p class="my-4">Contacto: {{ contactoPropuesta }}</p>
       <p class="my-4">Email: {{ correoP }}</p>
-      <p class="my-4">descripcion: {{ descripcionP }}</p>
-      <p class="my-4">ocupacion: {{ ocupacionP }}</p>
+      <p class="my-4">Descripcion: {{ descripcionP }}</p>
+      <p class="my-4">Ocupacion: {{ ocupacionP }}</p>
       <p class="my-4">Ciudad: {{ ciudadP }}</p>
       <br />
       <center>
