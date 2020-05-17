@@ -36,7 +36,7 @@ export default {
           window.location.replace("http://localhost:3000/propuestas");
         }
       } catch (error) {
-        console.log(error);
+        alert("Contraseña y/o usario incorrectos");
       }
     }
   }

@@ -21,7 +21,7 @@
                 placeholder="Ingrese tipo de convenio"
                 v-model="propuesta.tipoConvenio"
                 :options="tiposConvenio"
-              /></b-form-select>
+              />
             </b-form-group>
             <b-form-group label="Entidades involucradas" label-for="nombreEntidad">
               <b-form-select
