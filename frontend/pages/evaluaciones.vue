@@ -6,25 +6,39 @@
       <h1>Propuestas realizadas</h1>
       <br />
       <b-table striped hover :items="propuestasReducidas">
-        <template v-slot:cell(Detalles)="row">
-          <b-button
-            size="sm"
-            @click="detallesPropuesta(row)"
-            class="bg-udem boton"
-            >Detalles</b-button
-          >
-        </template>
-
         <template v-slot:cell(evaluar)="row">
           <b-button
             size="sm"
-            @click="cargarTareasPropuesta(row)"
+            @click="cargarInfoPropuesta(row)"
             class="bg-udem boton"
             >Evaluar</b-button
           >
         </template>
       </b-table>
     </b-card>
+
+<b-container>
+    <b-card class="bcard" v-if="this.enEvaluacion">
+      <center>
+        <h1>Informacion del Proponente</h1>
+      </center>
+      <p class="my-4">Nombre: {{ nombreCompletoProp }}</p>
+      <p class="my-4">Contacto: {{ contactoPropuesta }}</p>
+      <p class="my-4">Email: {{ correoP }}</p>
+      <p class="my-4">descripcion: {{ descripcionP }}</p>
+      <p class="my-4">ocupacion: {{ ocupacionP }}</p>
+      <p class="my-4">Ciudad: {{ ciudadP }}</p>
+      <br />
+      <center>
+      <h1>Informacion de la Propuesta</h1>
+      </center>
+      <p class="my-4">Propuesta numero: {{ idPropuesta }}</p>
+      <p class="my-4">Tipo de Convenio: {{ tipoPropuesta }}</p>
+      <p class="my-4">Descripcion: {{ descripcionPropuesta }}</p>
+      <p class="my-4">Posibles Beneficios: {{ beneficiosPropuesta }}</p>
+      <p class="my-4">Estado: {{ estadoPropuesta }}</p>
+    </b-card>
+</b-container>
 
     <b-card class="bcard" v-if="this.enEvaluacion">
       <h1>Tareas:</h1>
@@ -34,17 +48,14 @@
           <b-button
             size="sm"
             class="bg-udem boton"
-            @click="detallesTarea(fila),modalShow=!modalShow"
-           
+            @click="detallesTarea(fila), (modalShow = !modalShow)"
             >Detalles</b-button
           >
 
-          <b-modal id="modal-1"  v-model="modalShow" title="Tarea">
-            <p class="my-4">Tarea numero: {{idTarea}}</p>
-            <p class="my-4">Nombre: {{nombreTarea}}</p>
-            <p class="my-4">Descripcion: {{descripcionTarea}}</p>
-           
-            
+          <b-modal id="modal-1" v-model="modalShow" title="Tarea">
+            <p class="my-4">Tarea numero: {{ idTarea }}</p>
+            <p class="my-4">Nombre: {{ nombreTarea }}</p>
+            <p class="my-4">Descripcion: {{ descripcionTarea }}</p>
           </b-modal>
         </template>
 
