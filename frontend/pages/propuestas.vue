@@ -42,7 +42,7 @@
                   <template v-slot:cell(Detalles)="row">
                     <b-button
                       size="sm"
-                      @click="detallesPropuesta(row)"
+                      @click="detallesEntidad(row)"
                       class="bg-udem boton"
                     >Detalles</b-button>
                   </template>

@@ -355,6 +355,34 @@ export default {
       }
     },
 
+    detallesEntidad({ item }) {
+      console.log(this.entidades);
+      console.log(item);
+
+      let posicion = this.entidades.findIndex(
+        entidad => entidad.id == item.id_Entidad
+      );
+      const entidad = this.entidades[posicion];
+      const info =
+        "id: " +
+        entidad.id +
+        "\n nombre: " +
+        entidad.nombre +
+        "\n direccion: " +
+        entidad.direccion +
+        "\n pagina_web: " +
+        entidad.pagina_web +
+        "\n nit: " +
+        entidad.nit +
+        "\n pais: " +
+        entidad.pais +
+        "\n departamento: " +
+        entidad.departamento +
+        "\n ciudad: " +
+        entidad.ciudad;
+      alert(info);
+    },
+
     limpiarCampos() {
       this.propuesta = {
         tipoConvenio: null,
