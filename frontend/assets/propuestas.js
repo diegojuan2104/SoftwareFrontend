@@ -49,6 +49,7 @@ export default {
   },
   methods: {
     async actualizarPropuesta() {
+      if (this.validarCantidadDePropuestas()) return;
       let token = this.token();
       let propuesta = {
         infoContacto: this.propuesta.telefono,
@@ -57,6 +58,16 @@ export default {
         beneficios: this.propuesta.posiblesBeneficios,
         estado: this.propuesta.estado
       };
+
+      if (
+        propuesta.infoContacto == "" ||
+        propuesta.tipoConvenio == null ||
+        propuesta.descripcionIniciativa == "" ||
+        propuesta.beneficios == ""
+      ) {
+        alert("Todos los campos que se van a actualizar deben de estar llenos");
+        return;
+      }
 
       axios
         .put(
@@ -92,6 +103,9 @@ export default {
                   }
                 )
                 .then(res => {
+                  alert(
+                    "Propuesta Actualizada id:" + this.propuesta.idPropuesta
+                  );
                   console.log(res);
                   this.limpiarCampos();
                   this.enEdicion = false;
@@ -145,6 +159,9 @@ export default {
           this.entidadesAgregadas.push(entidad);
           this.entidadesAgregadasReducidas.push(entidadR);
           this.enEdicion = true;
+          alert(
+            "Ahora puede modificar los atributos de la propuesta seleccionada"
+          );
         });
       } catch (error) {
         console.log(error);
@@ -255,6 +272,8 @@ export default {
 
         this.propuestasReducidas.splice(posicion1, 1);
         this.entidadesAgregadasReducidas.splice(posicion1, 1);
+        alert("Propuesta eliminada id: " + item.id);
+
         //this.limpiarCampos();
         console.log(res);
       } catch (error) {
@@ -262,6 +281,12 @@ export default {
       }
     },
 
+    validarCantidadDePropuestas() {
+      if (this.entidadesAgregadas.length <= 1) {
+        alert("Deben existir al menos 2 involucrados");
+        return true;
+      }
+    },
     //Elimina una entidad de la tabla seleccionada
     eliminarEntidad({ item }) {
       let posicion = this.entidadesAgregadas.findIndex(
@@ -273,6 +298,7 @@ export default {
     //Crea la propuesta
     crearPropuesta() {
       try {
+        if (this.validarCantidadDePropuestas()) return;
         let token = this.token();
         let propuesta = {
           infoContacto: this.propuesta.telefono,
@@ -319,6 +345,7 @@ export default {
               .then(res => {
                 this.propuestasReducidas.push(propuestaReducida);
                 this.propuestas.push(propuestaAgregada);
+                alert("Propuesta Creada");
                 console.log(res);
                 this.limpiarCampos();
               });
@@ -337,7 +364,6 @@ export default {
       };
       this.entidadesAgregadasReducidas = [];
       this.entidadesAgregadas = [];
-    },
-    
+    }
   }
 };
