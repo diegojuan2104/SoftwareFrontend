@@ -12,11 +12,20 @@ export default {
       propuesta: {
         idPropuesta: "",
         telefono: "",
-        tipoConvenio: "",
+        tipoConvenio: null,
         iniciativa: "",
         posiblesBeneficios: "",
         estado: ""
       },
+      tiposConvenio: [
+        {
+          value: null,
+          text: "Seleccione tipo de convenio"
+        },
+        { text: "Estudio", value: "Estudio" },
+        { text: "Idiomas", value: "Idiomas" },
+        { text: "Deporte", value: "Deporte" }
+      ],
       propuestas: [],
       entidades: [],
       //Lista de entidade agregadas temporalmente al registro
@@ -25,7 +34,6 @@ export default {
       enEdicion: false,
       //valor de la entidad seleccionada en determinado instante
       entidadSeleccionada: null,
-
       //Lista de la propuesta reducida, para poder visualizarla correctamente en la tabla
       propuestasReducidas: [],
       //Lista con solo el id y nombre de la entidades seleccionadas,para verla en el combo box o select
@@ -40,6 +48,109 @@ export default {
     };
   },
   methods: {
+    async actualizarPropuesta() {
+      let token = this.token();
+      let propuesta = {
+        infoContacto: this.propuesta.telefono,
+        tipoConvenio: this.propuesta.tipoConvenio,
+        descripcionIniciativa: this.propuesta.iniciativa,
+        beneficios: this.propuesta.posiblesBeneficios,
+        estado: this.propuesta.estado
+      };
+
+      axios
+        .put(
+          "http://localhost:3001/api/v1/propuestas/" +
+            this.propuesta.idPropuesta,
+          propuesta,
+          {
+            headers: { token }
+          }
+        )
+        .then(res => {
+          console.log(res);
+          axios
+            .delete(
+              "http://localhost:3001/api/v1/involucrados/" +
+                this.propuesta.idPropuesta,
+              {
+                headers: { token }
+              }
+            )
+            .then(res => {
+              const involucrados = {
+                idUsuario: sessionStorage.getItem("idUser"),
+                entidades: this.entidadesAgregadas,
+                idPropuesta: this.propuesta.idPropuesta
+              };
+              axios
+                .post(
+                  "http://localhost:3001/api/v1/involucrados",
+                  involucrados,
+                  {
+                    headers: { token }
+                  }
+                )
+                .then(res => {
+                  console.log(res);
+                  this.limpiarCampos();
+                  this.enEdicion = false;
+                  this.recargarPagina();
+                });
+            });
+        });
+    },
+
+    //Carga una propuesta en específico
+    async cargarPropuesta({ item }) {
+      try {
+        this.limpiarCampos();
+        let token = sessionStorage.getItem("token");
+
+        let posicion = this.propuestas.findIndex(
+          propuesta => propuesta.id == item.id
+        );
+
+        console.log(this.propuestas[posicion]);
+        this.propuesta = {
+          idPropuesta: this.propuestas[posicion].id,
+          tipoConvenio: this.propuestas[posicion].tipo_convenio,
+          iniciativa: this.propuestas[posicion].descripcion_iniciativa,
+          posiblesBeneficios: this.propuestas[posicion].beneficios,
+          estado: this.propuestas[posicion].estado,
+          telefono: this.propuestas[posicion].info_contacto
+        };
+
+        const res = await axios.get(
+          "http://localhost:3001/api/v1/involucrados/" +
+            this.propuesta.idPropuesta,
+          {
+            headers: { token }
+          }
+        );
+        console.log(res.data);
+
+        let entidades = res.data;
+
+        entidades.forEach(element => {
+          const entidad = element.id_entidad;
+
+          const entidadR = {
+            id_Entidad: element.id_entidad,
+            Nombre_Entidad: element.nombre_entidad,
+            Detalles: true,
+            Eliminar: true
+          };
+
+          this.entidadesAgregadas.push(entidad);
+          this.entidadesAgregadasReducidas.push(entidadR);
+          this.enEdicion = true;
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
     // Carga las porpuestas en la tabla
     async cargarPropuestas() {
       try {
@@ -66,11 +177,10 @@ export default {
           this.propuestasReducidas.push(propuestaReducida);
         }
 
-        console.log(this.propuestasReducidas);
-        console.log(this.propuestas);
+        //console.log(this.propuestasReducidas);
+        //console.log(this.propuestas);
       } catch (error) {
         console.log(error);
-        window.location.replace("http://localhost:3000/error");
       }
     },
 
@@ -87,19 +197,17 @@ export default {
             };
             this.entidadesAgregadasReducidas.push(entidadAgregada);
             this.entidadesAgregadas.push(this.entidadSeleccionada);
-            this.entidadSeleccionada = null;
             break;
           }
         }
       }
+      this.entidadSeleccionada = null;
     },
 
     //Carga las entidades ya registradas en la bd
     async cargarEntidades() {
       //this.entidadesReducidas = Array();
       try {
-        this.prouestas = [];
-        this.propuestasReducidas = [];
         let token = sessionStorage.getItem("token");
         const res = await axios.get("http://localhost:3001/api/v1/entidades", {
           headers: { token }
@@ -142,14 +250,12 @@ export default {
         );
 
         let posicion1 = this.propuestas.findIndex(
-          propuesta => propuesta.id == item.id_Propuesta
+          propuesta => propuesta.id == item.id
         );
-        let posicion2 = this.propuestasReducidas.findIndex(
-          propuestaReducida => propuestaReducida.id == item.id_Propuesta
-        );
-        this.propuestasReducidas.splice(posicion1, 1);
-        this.entidadesAgregadasReducidas.splice(posicion2, 1);
 
+        this.propuestasReducidas.splice(posicion1, 1);
+        this.entidadesAgregadasReducidas.splice(posicion1, 1);
+        //this.limpiarCampos();
         console.log(res);
       } catch (error) {
         console.log(error);
@@ -182,8 +288,16 @@ export default {
           })
           .then(res => {
             console.log(res);
-            const idPropuestaCreada = res.data.id.id;
 
+            const idPropuestaCreada = res.data.id.id;
+            let propuestaAgregada = {
+              id: idPropuestaCreada,
+              tipo_convenio: propuesta.tipoConvenio,
+              descripcion_iniciativa: propuesta.descripcionIniciativa,
+              beneficios: propuesta.beneficios,
+              estado: propuesta.estado,
+              info_contacto: propuesta.infoContacto
+            };
             let propuestaReducida = {
               id: idPropuestaCreada,
               tipo_de_convenio: propuesta.tipoConvenio,
@@ -203,10 +317,10 @@ export default {
                 headers: { token }
               })
               .then(res => {
-                this.limpiarCampos();
                 this.propuestasReducidas.push(propuestaReducida);
-                this.propuestas.push(propuesta);
+                this.propuestas.push(propuestaAgregada);
                 console.log(res);
+                this.limpiarCampos();
               });
           });
       } catch (error) {
@@ -216,13 +330,14 @@ export default {
 
     limpiarCampos() {
       this.propuesta = {
-        tipoConvenio: "",
+        tipoConvenio: null,
         iniciativa: "",
         posiblesBeneficios: "",
         estado: ""
       };
       this.entidadesAgregadasReducidas = [];
       this.entidadesAgregadas = [];
-    }
+    },
+    
   }
 };

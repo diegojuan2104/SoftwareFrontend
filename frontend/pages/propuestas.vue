@@ -14,14 +14,14 @@
             </h4>
             <br />
             <b-form-group label="Tipo de convenio" label-for="tipoConvenio">
-              <b-form-input
+              <b-form-select
                 class="form-control"
                 type="text"
                 id="tipoConvenio"
                 placeholder="Ingrese tipo de convenio"
                 v-model="propuesta.tipoConvenio"
-                v-bind:required="true"
-              />
+                :options="tiposConvenio"
+              /></b-form-select>
             </b-form-group>
             <b-form-group label="Entidades involucradas" label-for="nombreEntidad">
               <b-form-select
@@ -33,9 +33,18 @@
 
               <h4>Lista de entidades involucradas</h4>
               <b-card>
-                <b-table ref="tablaEntidadesAgre" striped hover :items="this.entidadesAgregadasReducidas">
+                <b-table
+                  ref="tablaEntidadesAgre"
+                  striped
+                  hover
+                  :items="this.entidadesAgregadasReducidas"
+                >
                   <template v-slot:cell(Detalles)="row">
-                    <b-button size="sm" @click="detallesPropuesta(row)" class="bg-udem boton">Detalles</b-button>
+                    <b-button
+                      size="sm"
+                      @click="detallesPropuesta(row)"
+                      class="bg-udem boton"
+                    >Detalles</b-button>
                   </template>
                   <template v-slot:cell(Eliminar)="row">
                     <b-button size="sm" @click="eliminarEntidad(row)" class="bg-udem boton">Eliminar</b-button>
@@ -77,12 +86,12 @@
             </b-form-group>
 
             <div class="d-flex justify-content-end">
-              <b-button class="bg-udem boton" type="submit" v-if="!this.enEdicion">Subir info</b-button>
               <b-button
-                clas="bg-udem boton"
-                @click="actualizarPropuesta()"
-                v-else
-              >Actualizar propuesta</b-button>
+                class="bg-udem boton"
+                type="submit"
+                v-if="this.enEdicion == false"
+              >Subir info</b-button>
+              <b-button class="bg-udem boton" @click="actualizarPropuesta()" v-if="this.enEdicion == true">Actualizar</b-button>
             </div>
           </b-form>
         </b-card>

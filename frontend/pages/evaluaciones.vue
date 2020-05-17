@@ -43,8 +43,6 @@
             <p class="my-4">Tarea numero: {{idTarea}}</p>
             <p class="my-4">Nombre: {{nombreTarea}}</p>
             <p class="my-4">Descripcion: {{descripcionTarea}}</p>
-           
-            
           </b-modal>
         </template>
 
