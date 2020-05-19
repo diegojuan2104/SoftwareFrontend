@@ -10,7 +10,8 @@
             <b-button
               size="sm"
               @click="cargarInfoPropuesta(row)"
-              class="bg-udem boton"
+              block
+              variant="danger"
               >Evaluar</b-button
             >
           </template>
@@ -46,7 +47,8 @@
         <template v-slot:cell(descripcion)="fila">
           <b-button
             size="sm"
-            class="bg-udem boton"
+            block
+            variant="danger"
             @click="detallesTarea(fila), (modalShow = !modalShow)"
             >Detalles</b-button
           >
@@ -79,7 +81,8 @@
         <template v-slot:cell(evaluar)="evaluar">
           <b-button
             size="sm"
-            class="bg-udem boton"
+            block
+            variant="danger"
             @click="detallesTarea(evaluar)"
             >Evaluar</b-button
           >

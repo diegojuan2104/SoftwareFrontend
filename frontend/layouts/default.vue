@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-udem">
+    <!--<nav class="navbar navbar-expand-lg navbar-dark bg-udem">
       <a class="navbar-brand" href="#">Gestión de propuestas de convenio</a>
       <button
         class="navbar-toggler"
@@ -20,7 +20,26 @@
           </li>
         </ul>
       </div>
-    </nav>
+    </nav> -->
+
+    <b-navbar toggleable type="light" variant="faded">
+      <b-img
+        src="https://redunete.net/wp-content/uploads/2019/02/logo-blanco-Udem-700x300.jpg"
+        fluid
+        alt="Fluid image"
+        width="200px"
+      ></b-img>
+
+      <div class="title">
+        Gestion de Propuestas y Evaluaciones de Convenios
+      </div>
+
+      <b-navbar-toggle target="navbar-toggle-collapse">
+        <a href="/" class="link">
+          Cerrar Sesion
+        </a>
+      </b-navbar-toggle>
+    </b-navbar>
 
     <nuxt />
   </div>
@@ -34,6 +53,17 @@ export default {
 </script>
 
 <style>
+
+
+.link{
+  color : #ed0034;
+}
+
+.link:hover{
+  text-decoration: none;
+  color : #ed0034;
+  
+}
 .wf {
   color: #ffffff;
   margin: 10px;
@@ -43,6 +73,40 @@ export default {
   color: #fff;
   border-color: black;
   background-color: #ba0f16;
+}
+
+.title {
+  font-family: "Oswald", sans-serif;
+  margin: 20px;
+  font-size: 30px;
+  font-weight: bold;
+  color: #ed0034;
+}
+
+.iconEdit {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: stretch;
+}
+.center {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: stretch;
+}
+
+.icon {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: stretch;
 }
 
 .navbar-dark .navbar-brand {
@@ -73,7 +137,6 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 }
-
 
 .bcard {
   margin-top: 30px;
