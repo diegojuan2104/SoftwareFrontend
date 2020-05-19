@@ -10,3 +10,13 @@
   </v-app>
 </template>
 
+
+<style>
+
+body {
+  background-image: url("/images/background-01.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+</style>

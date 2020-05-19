@@ -29,7 +29,7 @@
                   v-model="clave"
                 />
               </b-form-group>
-              <b-button class="bg-udem boton" type="submit">Iniciar Sesión</b-button>
+              <b-button block variant="danger" type="submit">Iniciar Sesión</b-button>
             </div>
           </center>
         </b-form>
@@ -48,4 +48,12 @@
 .mensaje {
   color: black;
 }
+
+body {
+  background-image: url("../images/background-01.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
 </style>

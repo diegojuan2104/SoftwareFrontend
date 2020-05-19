@@ -58,29 +58,7 @@ export default {
   background-color: #ba0f16;
 }
 
-.btn-secondary:hover {
-  color: #ba0f16;
-  background-color: white;
-}
-.btn-primary:hover {
-  color: #ba0f16;
-  background-color: white;
-}
 
-.boton {
-  border-radius: 55px 55px 55px 55px;
-  -moz-border-radius: 55px 55px 55px 55px;
-  -webkit-border-radius: 55px 55px 55px 55px;
-  border: 0.5px solid #000000;
-}
-
-.btn-secondary {
-  border-radius: 55px 55px 55px 55px;
-  -moz-border-radius: 55px 55px 55px 55px;
-  -webkit-border-radius: 55px 55px 55px 55px;
-  border: 0.5px solid #000000;
-  background-color: #ba0f16;
-}
 
 .wf:hover {
   color: #ba0f16;
@@ -100,15 +78,24 @@ export default {
 }
 
 body {
-  background-color: #cad1db;
+  background-image: url("../images/background-01.png");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-.bcard {
-  margin: 35px;
 
-  border-radius: 40px 40px 40px 40px;
-  -moz-border-radius: 40px 40px 40px 40px;
-  -webkit-border-radius: 40px 40px 40px 40px;
-  border: 1px solid #000000;
+.bcard {
+  margin-top: 30px;
+  background-color: white;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: stretch;
+  -webkit-box-shadow: -7px 7px 26px 0px rgba(150, 150, 150, 1);
+  -moz-box-shadow: -7px 7px 26px 0px rgba(150, 150, 150, 1);
+  box-shadow: -7px 7px 26px 0px rgba(150, 150, 150, 1);
 }
 </style>
