@@ -28,9 +28,7 @@
 
 <script>
 import axios from "axios";
-export default {
-  async beforeMount() {}
-};
+export default {};
 </script>
 
 <style>

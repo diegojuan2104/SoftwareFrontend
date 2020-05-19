@@ -29,7 +29,7 @@ export default {
         sessionStorage.setItem("idUser", user);
         sessionStorage.setItem("userRol", userRol);
         sessionStorage.setItem("token", token);
-        axios.defaults.headers.common["Authorization"] = token;
+        //axios.defaults.headers.common["Authorization"] = token;
         if (userRol == 2) {
           window.location.replace("http://localhost:3000/evaluaciones");
         } else {
