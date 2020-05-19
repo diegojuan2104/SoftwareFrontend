@@ -1,18 +1,24 @@
 <template>
   <div>
     <!-- Content here -->
-
-    <b-card class="bcard">
-      <h1>Propuestas realizadas</h1>
-      <br />
-      <b-table striped hover :items="propuestasReducidas">
-        <template v-slot:cell(evaluar)="row">
-          <b-button size="sm" @click="cargarInfoPropuesta(row)" class="bg-udem boton">Evaluar</b-button>
-        </template>
-      </b-table>
-    </b-card>
-
     <b-container>
+      <b-card class="bcard">
+        <h1>Propuestas realizadas</h1>
+        <br />
+        <b-table striped hover :items="propuestasReducidas">
+          <template v-slot:cell(evaluar)="row">
+            <b-button
+              size="sm"
+              @click="cargarInfoPropuesta(row)"
+              block
+              variant="danger"
+              >Evaluar</b-button
+            >
+          </template>
+        </b-table>
+      </b-card>
+
+
       <b-card class="bcard" v-if="this.enEvaluacion">
         <center>
           <h1>Informacion del Proponente</h1>
@@ -42,7 +48,8 @@
         <template v-slot:cell(descripcion)="fila">
           <b-button
             size="sm"
-            class="bg-udem boton"
+            block
+            variant="danger"
             @click="detallesTarea(fila), (modalShow = !modalShow)"
           >Detalles</b-button>
 
@@ -69,7 +76,8 @@
           ></b-form-textarea>
         </template>
         <template v-slot:cell(evaluar)="row">
-          <b-button size="sm" class="bg-udem boton" @click="evaluarTarea(row)">Evaluar</b-button>
+          <b-button size="sm"             block
+            variant="danger"  @click="evaluarTarea(row)">Evaluar</b-button>
         </template>
       </b-table>
     </b-card>

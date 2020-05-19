@@ -6,8 +6,8 @@
       <div>
         <b-card class="bcard" title>
           <b-form action="javascript:void(0)" @submit="crearPropuesta()">
-            <h1>Inscripción propuesta de convenio</h1>
-
+            <h1 v-if="enEdicion">Actualización propuesta de convenio: {{propuesta.idPropuesta}}</h1>
+            <h1 v-if="!enEdicion">Inscripción propuesta de convenio</h1>
             <h4>
               Ingrese a continuación la siguiente información acerca del
               convenio
@@ -43,11 +43,17 @@
                     <b-button
                       size="sm"
                       @click="detallesEntidad(row)"
-                      class="bg-udem boton"
+                      block
+                      variant="danger"
                     >Detalles</b-button>
                   </template>
                   <template v-slot:cell(Eliminar)="row">
-                    <b-button size="sm" @click="eliminarEntidad(row)" class="bg-udem boton">Eliminar</b-button>
+                    <b-button
+                      size="sm"
+                      @click="eliminarEntidad(row)"
+                      block
+                      variant="danger"
+                    >Eliminar</b-button>
                   </template>
                 </b-table>
               </b-card>
@@ -87,11 +93,17 @@
 
             <div class="d-flex justify-content-end">
               <b-button
-                class="bg-udem boton"
+                block
+                variant="danger"
                 type="submit"
                 v-if="this.enEdicion == false"
               >Subir info</b-button>
-              <b-button class="bg-udem boton" @click="actualizarPropuesta()" v-if="this.enEdicion == true">Actualizar</b-button>
+              <b-button
+                block
+                variant="danger"
+                @click="actualizarPropuesta()"
+                v-if="this.enEdicion == true"
+              >Actualizar</b-button>
             </div>
           </b-form>
         </b-card>
@@ -100,13 +112,13 @@
         <h3>Propuestas Realizadas</h3>
         <b-table ref="tablaPropuestas" striped hover :items="this.propuestasReducidas">
           <template v-slot:cell(Modificar)="row">
-            <b-button size="sm" @click="cargarPropuesta(row)" class="bg-udem boton">Modificar</b-button>
+            <b-button block variant="danger" size="sm" @click="cargarPropuesta(row)">Modificar</b-button>
           </template>
           <template v-slot:cell(Eliminar)="row">
-            <b-button size="sm" @click="eliminarPropuesta(row)" class="bg-udem boton">Eliminar</b-button>
+            <b-button block variant="danger" size="sm" @click="eliminarPropuesta(row)">Eliminar</b-button>
           </template>
           <template v-slot:cell(Detalles)="row">
-            <b-button size="sm" @click="detallesPropuesta(row)" class="bg-udem boton">Detalles</b-button>
+            <b-button block variant="danger" size="sm" @click="detallesPropuesta(row)">Detalles</b-button>
           </template>
         </b-table>
       </b-card>

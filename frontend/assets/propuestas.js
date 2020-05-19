@@ -159,10 +159,10 @@ export default {
           this.entidadesAgregadas.push(entidad);
           this.entidadesAgregadasReducidas.push(entidadR);
           this.enEdicion = true;
-          alert(
-            "Ahora puede modificar los atributos de la propuesta seleccionada"
-          );
         });
+        alert(
+          "Ahora puede modificar los atributos de la propuesta seleccionada"
+        );
       } catch (error) {
         console.log(error);
       }
@@ -290,8 +290,9 @@ export default {
     //Elimina una entidad de la tabla seleccionada
     eliminarEntidad({ item }) {
       let posicion = this.entidadesAgregadas.findIndex(
-        entidadesAgregada => entidadesAgregada.id == item.id
+        entidadAgregada => entidadAgregada == item.id_Entidad
       );
+      console.log(item);
       this.entidadesAgregadas.splice(posicion, 1);
       this.entidadesAgregadasReducidas.splice(posicion, 1);
     },
