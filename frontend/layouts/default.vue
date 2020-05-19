@@ -50,15 +50,6 @@ export default {
   font-size: 25px;
   font-weight: bold;
 }
-.btn-primary {
-  border-radius: 55px 55px 55px 55px;
-  -moz-border-radius: 55px 55px 55px 55px;
-  -webkit-border-radius: 55px 55px 55px 55px;
-  border: 0.5px solid #000000;
-  background-color: #ba0f16;
-}
-
-
 
 .wf:hover {
   color: #ba0f16;
