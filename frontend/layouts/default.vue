@@ -53,16 +53,13 @@ export default {
 </script>
 
 <style>
-
-
-.link{
-  color : #ed0034;
+.link {
+  color: #ed0034;
 }
 
-.link:hover{
+.link:hover {
   text-decoration: none;
-  color : #ed0034;
-  
+  color: #ed0034;
 }
 .wf {
   color: #ffffff;
@@ -71,8 +68,8 @@ export default {
 }
 .custom-control-input:checked ~ .custom-control-label::before {
   color: #fff;
-  border-color: black;
-  background-color: #ba0f16;
+  background-color: #dc3545;
+  border-color: #dc3545;
 }
 
 .title {
@@ -83,29 +80,12 @@ export default {
   color: #ed0034;
 }
 
-.iconEdit {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  align-content: stretch;
-}
 .center {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: center;
-  align-content: stretch;
-}
-
-.icon {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
   align-content: stretch;
 }
 
