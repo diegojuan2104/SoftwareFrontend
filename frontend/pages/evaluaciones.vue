@@ -11,7 +11,7 @@
           </template>
         </b-table>
       </b-card>
-
+      
       <b-card class="bcard" v-if="this.enEvaluacion">
         <center>
           <h1>Informacion del Proponente</h1>

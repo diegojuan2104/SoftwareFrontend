@@ -9,6 +9,7 @@ export default {
   data() {
     return {
       //Propuesta Completa
+      //   <b-table ref="tablaPropuestas" striped hover :items="propuestasReducidas"></b-table>
       propuesta: {
         idPropuesta: "",
         telefono: "",
@@ -46,17 +47,12 @@ export default {
         }
       ],
 
-
       modalShow: false,
-      idPropuesta:"",
-      tipoConvenioP:"",
-      beneficiosP:"",
-      estadoP:"",
-      descripcionP:""
-
-
-
-
+      idPropuesta: "",
+      tipoConvenioP: "",
+      beneficiosP: "",
+      estadoP: "",
+      descripcionP: ""
     };
   },
   methods: {
@@ -200,7 +196,7 @@ export default {
             id: this.propuestas[i].id,
             tipo_de_convenio: this.propuestas[i].tipo_convenio,
             Estado: this.propuestas[i].estado,
-            Detalles : true,
+            Detalles: true,
             Modificar: true,
             Eliminar: true
           };
@@ -342,6 +338,7 @@ export default {
               id: idPropuestaCreada,
               tipo_de_convenio: propuesta.tipoConvenio,
               Estado: propuesta.estado,
+              Detalles: true,
               Modificar: true,
               Eliminar: true
             };
@@ -368,28 +365,23 @@ export default {
         console.log(error);
       }
     },
-    detallesPropuesta({item}){
-
-      this.idPropuesta= item.id
+    detallesPropuesta({ item }) {
+      this.idPropuesta = item.id;
 
       for (let i = 0; i < this.propuestas.length; i++) {
-        
-        if(this.idPropuesta=== this.propuestas[i].id){
-            console.log(this.propuestas[i]);
-            this.tipoConvenioP=this.propuestas[i].tipo_convenio
-            this.beneficiosP=this.propuestas[i].beneficios
-            this.estadoP=this.propuestas[i].estado
-            this.descripcionP=this.propuestas[i].descripcion_iniciativa
+        if (this.idPropuesta === this.propuestas[i].id) {
+          console.log(this.propuestas[i]);
+          this.tipoConvenioP = this.propuestas[i].tipo_convenio;
+          this.beneficiosP = this.propuestas[i].beneficios;
+          this.estadoP = this.propuestas[i].estado;
+          this.descripcionP = this.propuestas[i].descripcion_iniciativa;
         }
-        
       }
-      
     },
 
-    detallesEntidad({ item }) {
+    Entidad({ item }) {
       console.log(this.entidades);
       console.log(item);
-      
 
       let posicion = this.entidades.findIndex(
         entidad => entidad.id == item.id_Entidad
