@@ -359,6 +359,7 @@ export default {
     detallesEntidad({ item }) {
       console.log(this.entidades);
       console.log(item);
+      
 
       let posicion = this.entidades.findIndex(
         entidad => entidad.id == item.id_Entidad

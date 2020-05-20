@@ -7,17 +7,10 @@
         <br />
         <b-table striped hover :items="propuestasReducidas">
           <template v-slot:cell(evaluar)="row">
-            <b-button
-              size="sm"
-              @click="cargarInfoPropuesta(row)"
-              block
-              variant="danger"
-              >Evaluar</b-button
-            >
+            <b-button size="sm" @click="cargarInfoPropuesta(row)" block variant="danger">Evaluar</b-button>
           </template>
         </b-table>
       </b-card>
-
 
       <b-card class="bcard" v-if="this.enEvaluacion">
         <center>
@@ -60,15 +53,20 @@
           </b-modal>
         </template>
 
-        <template v-slot:cell(aprobacion)>
-          <b-form-checkbox size="lg" name="check-button" switch></b-form-checkbox>
+        <template v-slot:cell(aprobacion)="row">
+          <b-form-checkbox
+            size="lg"
+            v-model="checkboxes[row.item.id]['aprobado']"
+            name="check-button"
+            switch
+          ></b-form-checkbox>
         </template>
         <template v-slot:cell(pdf)="row">
-          <b-form-file v-model="archivo" @input="seleccionArchivo(row)" class="mt-3" plain></b-form-file>
+          <b-form-file v-model="pdfs[row.item.id]['pdf']" class="mt-3" plain></b-form-file>
         </template>
         <template v-slot:cell(comentario)="row">
           <b-form-textarea
-            v-model="comentario[row.id]"
+            v-model="informacion[row.item.id]['comentario']"
             id="comentarioTarea"
             placeholder="Ingrese Comentario..."
             rows="3"
@@ -76,10 +74,10 @@
           ></b-form-textarea>
         </template>
         <template v-slot:cell(evaluar)="row">
-          <b-button size="sm"             block
-            variant="danger"  @click="evaluarTarea(row)">Evaluar</b-button>
+          <b-button size="sm" block variant="danger" @click="evaluarTarea(row)">Evaluar</b-button>
         </template>
       </b-table>
+      <b-button size="sm" block variant="danger" @click="evaluarTarea()">Enviar Evaluación</b-button>
     </b-card>
   </div>
 </template>

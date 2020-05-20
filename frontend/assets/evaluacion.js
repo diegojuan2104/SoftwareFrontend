@@ -29,11 +29,10 @@ export default {
       contactoPropuesta: "",
       estadoPropuesta: "",
       idPropuesta: "",
-
-      archivo: "",
-      archivos: [],
-      comentario: [" ", " "],
-      comentarios: []
+      pdfs: {},
+      informacion: {},
+      checkboxes: {},
+      tareasEvaluadas: []
     };
   },
   methods: {
@@ -58,37 +57,91 @@ export default {
 
       this.comentarios.push(comentario);
     },
+    //F5
+    recargarPagina() {
+      window.location.replace("http://localhost:3000/evaluaciones");
+    },
 
-    async evaluarTarea(item) {
-      let archivo = "";
-      let comentario = "";
+    async evaluarTarea() {
+      let contAprobado = 0;
+      const token = this.token();
       try {
-        // SELECCION DE ARCHIVO
-        let posicion = this.archivos.findIndex(
-          archivo => archivo.id == item.item.id
-        );
+        for (let i = 1; i <= this.tareasReducidas.length; i++) {
+          console.log("Tarea: " + i);
 
-        if (archivo == null || posicion == -1) {
-          console.log("No se ha seleccionado ningún archivo");
-        } else {
-          archivo = this.archivos[posicion].archivo;
+          let archivo = this.pdfs[i]["pdf"] ? this.pdfs[i]["pdf"] : "";
+          let aprobado = this.checkboxes[i]["aprobado"];
+
+          if (aprobado == null || aprobado == false) {
+            aprobado = "Rechazado";
+          } else {
+            aprobado = "Aprobado";
+            contAprobado++;
+          }
+
+          let comentario = this.informacion[i]["comentario"];
+          if (comentario == null) {
+            alert("Todas las tareas necesitan deben tener un comentario");
+            this.tareasEvaluadas = [];
+            return;
+          }
+          let tarea = {
+            id: i,
+            aprobado,
+            comentario,
+            archivo
+          };
+          this.tareasEvaluadas.push(tarea);
         }
 
-        console.log(comentario[0]);
+        var f = new Date();
 
-        //SELECCION DE COMENTARIO
-        //posicion = this.comentarios.findIndex(
-        //comentario => comentario.id == item.item.id
-        //);
-        //console.log(posicion);
+        let fecha =
+          f.getFullYear() + "-" + (f.getMonth() + 1) + "-" + f.getDate();
 
-        //console.log(this.comentarios[posicion]);
+        this.tareasEvaluadas.forEach(tarea => {
+          let formData = new FormData();
 
-        // let formData = new FormData();
-        //formData.append("archivo", archivo);
+          formData.append("archivo", tarea.archivo);
+          //body
+          formData.set("idTarea", tarea.id);
+          formData.set("fecha", fecha);
+          formData.set("comentario", tarea.comentario);
+          formData.set("estado", tarea.aprobado);
+          formData.set("idPropuesta", this.idPropuesta);
 
-        //formData.set("idTarea", item.item.id);
-      } catch (error) {}
+          axios
+            .post("http://localhost:3001/api/v1/evaluaciones", formData, {
+              headers: { token }
+            })
+            .then(res => {
+              console.log(res);
+            });
+        });
+      } catch (error) {
+        console.log(error);
+      }
+      alert("Propuesta evaluada correctamente");
+      this.tareasEvaluadas = [];
+
+      let estado =
+        contAprobado == this.tareasReducidas.length ? "Aprobado" : "Rechazado";
+
+      let estadoObj = {
+        estado
+      };
+      axios
+        .put(
+          "http://localhost:3001/api/v1/evaluaciones/" + this.idPropuesta,
+          estadoObj,
+          {
+            headers: { token }
+          }
+        )
+        .then(res => {
+          console.log(res);
+          this.recargarPagina();
+        });
     },
     // Carga las porpuestas en la tabla
     async cargarPropuestas() {
@@ -105,6 +158,7 @@ export default {
         //Se añaden datos a lista reducida pd: No sé porque el foreach no me funcionaba
 
         for (let i = 0; i < this.propuestas.length; i++) {
+          if (this.propuestas[i].estado != "Etapa de Revisión") continue;
           let propuestaReducida = {
             id_Propuesta: this.propuestas[i].id,
             tipo_de_convenio: this.propuestas[i].tipo_convenio,
@@ -138,10 +192,12 @@ export default {
             descripcion: true,
             aprobacion: true,
             pdf: true,
-            comentario: true,
-            evaluar: true
+            comentario: ""
           };
           this.tareasReducidas.push(tareasReducida);
+          this.informacion[this.tareas[i].id] = {};
+          this.checkboxes[this.tareas[i].id] = {};
+          this.pdfs[this.tareas[i].id] = {};
         }
         console.log(this.tareasReducidas);
       } catch (error) {
