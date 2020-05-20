@@ -9,7 +9,7 @@ export default {
   data() {
     return {
       //Propuesta Completa
-      //   <b-table ref="tablaPropuestas" striped hover :items="propuestasReducidas"></b-table>
+      //
       propuesta: {
         idPropuesta: "",
         telefono: "",
@@ -47,6 +47,8 @@ export default {
         }
       ],
 
+      tareas: [],
+      archivoTareas: [],
       modalShow: false,
       idPropuesta: "",
       tipoConvenioP: "",
@@ -58,6 +60,7 @@ export default {
   methods: {
     async actualizarPropuesta() {
       if (this.validarCantidadDePropuestas()) return;
+
       let token = this.token();
       let propuesta = {
         infoContacto: this.propuesta.telefono,
@@ -122,10 +125,19 @@ export default {
             });
         });
     },
-
+    validarPropuestaEvaluada(item) {
+      let pos = this.propuestas.findIndex(propuesta => propuesta.id == item.id);
+      if (this.propuestas[pos].estado != "Etapa de Revisión") {
+        alert(
+          "Esta propuesta ya fue evaluada y no puede ser modificada y/o eliminada"
+        );
+        return true;
+      }
+    },
     //Carga una propuesta en específico
     async cargarPropuesta({ item }) {
       try {
+        if (this.validarPropuestaEvaluada(item)) return;
         this.limpiarCampos();
         let token = sessionStorage.getItem("token");
 
@@ -264,6 +276,7 @@ export default {
     //Elimina una propuesta realizada
     async eliminarPropuesta({ item }) {
       try {
+        if (this.validarPropuestaEvaluada(item)) return;
         let token = sessionStorage.getItem("token");
         const propuestaEliminada = await axios.delete(
           "http://localhost:3001/api/v1/propuestas/" + item.id,
@@ -365,17 +378,58 @@ export default {
         console.log(error);
       }
     },
-    detallesPropuesta({ item }) {
-      this.idPropuesta = item.id;
 
-      for (let i = 0; i < this.propuestas.length; i++) {
-        if (this.idPropuesta === this.propuestas[i].id) {
-          console.log(this.propuestas[i]);
-          this.tipoConvenioP = this.propuestas[i].tipo_convenio;
-          this.beneficiosP = this.propuestas[i].beneficios;
-          this.estadoP = this.propuestas[i].estado;
-          this.descripcionP = this.propuestas[i].descripcion_iniciativa;
+    pdfConverter(base64) {
+      var binaryString = window.atob(base64);
+      var binaryLen = binaryString.length;
+      var bytes = new Uint8Array(binaryLen);
+      for (let i = 0; i < binaryLen; i++) {
+        var ascci = binaryString.charCodeAt(i);
+        bytes[i] = ascci;
+      }
+      return bytes;
+    },
+
+    detallesPropuesta({ item }) {
+      try {
+        this.idPropuesta = item.id;
+
+        for (let i = 0; i < this.propuestas.length; i++) {
+          if (this.idPropuesta === this.propuestas[i].id) {
+            console.log(this.propuestas[i]);
+            this.tipoConvenioP = this.propuestas[i].tipo_convenio;
+            this.beneficiosP = this.propuestas[i].beneficios;
+            this.estadoP = this.propuestas[i].estado;
+            this.descripcionP = this.propuestas[i].descripcion_iniciativa;
+          }
         }
+        let token = this.token();
+        axios
+          .get("http://localhost:3001/api/v1/evaluaciones/" + item.id, {
+            headers: { token }
+          })
+          .then(res => {
+            let tareasEvaludas = res.data;
+            console.log(res);
+            this.tareas = [];
+            this.archivoTareas = [];
+            tareasEvaludas.forEach(tarea => {
+              let archivo = this.pdfConverter(tarea.archivo);
+              let tareaObj = {
+                id: tarea.id_tarea,
+                nombre: tarea.nombre_tarea,
+                estado: tarea.estado_tarea,
+                Archivo: true,
+                comentario: tarea.comentario
+              };
+              this.tareas.push(tareaObj);
+              this.archivoTareas.push(archivo);
+            });
+            console.log(this.tareas);
+            console.log(this.archivoTareas);
+          });
+      } catch (error) {
+        console.log(error);
       }
     },
 
@@ -407,6 +461,19 @@ export default {
       alert(info);
     },
 
+    descargarArchivo(item) {
+      console.log(item.item.id);
+      let archivo = this.archivoTareas[item.item.id - 1];
+      console.log(archivo);
+      var a = document.createElement("a");
+      document.body.appendChild(a);
+      a.style = "display:none";
+      var blob = new Blob([archivo], { type: "application/pdf" });
+      let url = window.URL.createObjectURL(blob);
+      a.href = url;
+      a.download = "Archivo";
+      a.click();
+    },
     limpiarCampos() {
       this.propuesta = {
         tipoConvenio: null,

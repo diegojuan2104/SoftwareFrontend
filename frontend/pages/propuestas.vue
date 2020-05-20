@@ -118,13 +118,27 @@
               size="sm"
               @click="detallesPropuesta(row),(modalShow = !modalShow)"
             >Detalles</b-button>
-            <b-modal id="modal-1" v-model="modalShow" title="Tarea">
+            <b-modal id="modal-1" size="xl" v-model="modalShow" title="Detalles">
               <p class="my-4">Id propuesta: {{idPropuesta}}</p>
               <p class="my-4">Tipo Convenio: {{tipoConvenioP}}</p>
               <p class="my-4">Descripcion: {{descripcionP}}</p>
               <p class="my-4">Beneficios:{{beneficiosP}}</p>
               <p class="my-4">Estado:{{estadoP}}</p>
-           
+              <b-table responsive ref="tablaPropuestas" striped hover :items="tareas">
+                <template v-slot:cell(Archivo)="row">
+                  <b-button block variant="danger" size="sm" @click="descargarArchivo(row)">Archivo</b-button>
+                </template>
+              </b-table>
+              <template v-slot:modal-footer>
+                <div class="w-200">
+                  <b-button
+                    variant="danger"
+                    size="sm"
+                    class="float-right"
+                    @click="(modalShow = !modalShow)"
+                  >OK</b-button>
+                </div>
+              </template>
             </b-modal>
           </template>
           <template v-slot:cell(Modificar)="row">

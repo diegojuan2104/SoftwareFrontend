@@ -11,7 +11,7 @@
           </template>
         </b-table>
       </b-card>
-      
+
       <b-card class="bcard" v-if="this.enEvaluacion">
         <center>
           <h1>Informacion del Proponente</h1>
@@ -50,6 +50,16 @@
             <p class="my-4">Tarea numero: {{ idTarea }}</p>
             <p class="my-4">Nombre: {{ nombreTarea }}</p>
             <p class="my-4">Descripcion: {{ descripcionTarea }}</p>
+            <template v-slot:modal-footer>
+              <div class="w-200">
+                <b-button
+                  variant="danger"
+                  size="sm"
+                  class="float-right"
+                  @click="(modalShow = !modalShow)"
+                >OK</b-button>
+              </div>
+            </template>
           </b-modal>
         </template>
 
