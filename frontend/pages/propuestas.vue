@@ -6,7 +6,9 @@
       <div>
         <b-card class="bcard" title>
           <b-form action="javascript:void(0)" @submit="crearPropuesta()">
-            <h1 v-if="enEdicion">Actualización propuesta de convenio: {{propuesta.idPropuesta}}</h1>
+            <h1 v-if="enEdicion">
+              Actualización propuesta de convenio: {{ propuesta.idPropuesta }}
+            </h1>
             <h1 v-if="!enEdicion">Inscripción propuesta de convenio</h1>
             <h4>
               Ingrese a continuación la siguiente información acerca del
@@ -23,7 +25,10 @@
                 :options="tiposConvenio"
               />
             </b-form-group>
-            <b-form-group label="Entidades involucradas" label-for="nombreEntidad">
+            <b-form-group
+              label="Entidades involucradas"
+              label-for="nombreEntidad"
+            >
               <b-form-select
                 @change="seleccionarEntidad()"
                 id="entidadSeleccionada"
@@ -45,7 +50,8 @@
                       @click="detallesEntidad(row)"
                       block
                       variant="danger"
-                    >Detalles</b-button>
+                      >Detalles</b-button
+                    >
                   </template>
                   <template v-slot:cell(Eliminar)="row">
                     <b-button
@@ -53,7 +59,8 @@
                       @click="eliminarEntidad(row)"
                       block
                       variant="danger"
-                    >Eliminar</b-button>
+                      >Eliminar</b-button
+                    >
                   </template>
                 </b-table>
               </b-card>
@@ -69,7 +76,10 @@
               />
             </b-form-group>
 
-            <b-form-group label="Descripción de la iniciativa" label-for="razonConvenio">
+            <b-form-group
+              label="Descripción de la iniciativa"
+              label-for="razonConvenio"
+            >
               <b-form-textarea
                 class="form-control"
                 type="text"
@@ -80,7 +90,10 @@
               />
             </b-form-group>
 
-            <b-form-group label="Posibles beneficios" label-for="beneificiosConvenio">
+            <b-form-group
+              label="Posibles beneficios"
+              label-for="beneificiosConvenio"
+            >
               <b-form-textarea
                 class="form-control"
                 type="text"
@@ -97,28 +110,61 @@
                 variant="danger"
                 type="submit"
                 v-if="this.enEdicion == false"
-              >Subir info</b-button>
+                >Subir info</b-button
+              >
               <b-button
                 block
                 variant="danger"
                 @click="actualizarPropuesta()"
                 v-if="this.enEdicion == true"
-              >Actualizar</b-button>
+                >Actualizar</b-button
+              >
             </div>
           </b-form>
         </b-card>
       </div>
       <b-card class="bcard">
         <h3>Propuestas Realizadas</h3>
-        <b-table ref="tablaPropuestas" striped hover :items="this.propuestasReducidas">
+        <b-table
+          ref="tablaPropuestas"
+          striped
+          hover
+          :items="this.propuestasReducidas"
+        >
+          <template v-slot:cell(Detalles)="row">
+            <b-button
+              block
+              variant="danger"
+              size="sm"
+              @click="detallesPropuesta(row),(modalShow = !modalShow)"
+              >Detalles</b-button
+            >
+            <b-modal id="modal-1" v-model="modalShow" title="Tarea">
+              <p class="my-4">Id propuesta: {{idPropuesta}}</p>
+              <p class="my-4">Tipo Convenio: {{tipoConvenioP}}</p>
+              <p class="my-4">Descripcion: {{descripcionP}}</p>
+              <p class="my-4">Beneficios:{{beneficiosP}}</p>
+              <p class="my-4">Estado:{{estadoP}}</p>
+
+            </b-modal>
+          </template>
           <template v-slot:cell(Modificar)="row">
-            <b-button block variant="danger" size="sm" @click="cargarPropuesta(row)">Modificar</b-button>
+            <b-button
+              block
+              variant="danger"
+              size="sm"
+              @click="cargarPropuesta(row)"
+              >Modificar</b-button
+            >
           </template>
           <template v-slot:cell(Eliminar)="row">
-            <b-button block variant="danger" size="sm" @click="eliminarPropuesta(row)">Eliminar</b-button>
-          </template>
-          <template v-slot:cell(Detalles)="row">
-            <b-button block variant="danger" size="sm" @click="detallesPropuesta(row)">Detalles</b-button>
+            <b-button
+              block
+              variant="danger"
+              size="sm"
+              @click="eliminarPropuesta(row)"
+              >Eliminar</b-button
+            >
           </template>
         </b-table>
       </b-card>
@@ -126,4 +172,4 @@
   </div>
 </template>
 
-<script src="@/assets/propuestas.js"/>
+<script src="@/assets/propuestas.js" />
