@@ -20,7 +20,7 @@
           </li>
         </ul>
       </div>
-    </nav> -->
+    </nav>-->
 
     <b-navbar toggleable type="light" variant="faded">
       <b-img
@@ -30,14 +30,10 @@
         width="200px"
       ></b-img>
 
-      <div class="title">
-        Gestion de Propuestas y Evaluaciones de Convenios
-      </div>
+      <div class="title">Gestion de Propuestas y Evaluaciones de Convenios</div>
 
       <b-navbar-toggle target="navbar-toggle-collapse">
-        <a href="/" class="link">
-          Cerrar Sesion
-        </a>
+        <a href="/" class="link" @click="cerrarSesion()">Cerrar Sesion</a>
       </b-navbar-toggle>
     </b-navbar>
 
@@ -47,7 +43,13 @@
 
 <script>
 import axios from "axios";
-export default {};
+export default {
+  methods: {
+    cerrarSesion() {
+      localStorage.setItem("token", "");
+    }
+  }
+};
 </script>
 
 <style>

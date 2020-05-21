@@ -2,21 +2,35 @@ import axios from "axios";
 export default {
   mounted() {
     let token = localStorage.getItem("token");
-    console.log(token);
-    axios
-      .get(
-        "https://seguridad-udem-api.herokuapp.com/api/v1/verify",
-        {
-          Modulo: "Gestion"
-        },
-        { headers: { token: token } }
-      )
-      .then(response => {
-        console.log(response);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    if (token != "") {
+      console.log(token);
+      axios
+        .get("http://localhost:3001/api/v1/autenticacion/" + token, {
+          headers: { token: token }
+        })
+        .then(res => {
+          console.log(res);
+
+          const user = res.data.id;
+          const userRol = res.data.rol;
+          console.log(user);
+          console.log(userRol);
+          sessionStorage.setItem("idUser", user);
+          sessionStorage.setItem("userRol", userRol);
+          sessionStorage.setItem("token", token);
+
+          if (userRol == 2) {
+            window.location.replace("http://localhost:3000/evaluaciones");
+          } else {
+            window.location.replace("http://localhost:3000/propuestas");
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    } else {
+      console.log("Iniciar Sesión");
+    }
   },
   beforeMount() {
     sessionStorage.setItem("idUser", "");

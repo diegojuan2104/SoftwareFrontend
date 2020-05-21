@@ -1,4 +1,5 @@
 import axios from "axios";
+import url from "axios";
 export default {
   beforeMount() {
     this.cargarPropuestas();
