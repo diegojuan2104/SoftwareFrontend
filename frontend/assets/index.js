@@ -1,12 +1,15 @@
 import axios from "axios";
-import config from "../assets/config";
+const config = {
+  url: "https://gestion-propuestas-api.herokuapp.com/api/v1/",
+  url2: "http://localhost:3000/"
+};
 export default {
   mounted() {
     let token = localStorage.getItem("token");
     if (token != "") {
       console.log(token);
       axios
-        .get(config.url + "autenticacion/" + token, {
+        .get(url + "autenticacion/" + token, {
           headers: { token: token }
         })
         .then(res => {

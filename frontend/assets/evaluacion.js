@@ -1,5 +1,8 @@
 import axios from "axios";
-import config from "../assets/config";
+const config = {
+  url: "https://gestion-propuestas-api.herokuapp.com/api/v1/",
+  url2: "http://localhost:3000/"
+};
 export default {
   beforeMount() {
     this.cargarPropuestas();
