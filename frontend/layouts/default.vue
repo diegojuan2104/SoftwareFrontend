@@ -35,6 +35,11 @@
       </div>
 
       <b-navbar-toggle target="navbar-toggle-collapse">
+        <a href="" class="link" >
+          Home
+        </a>
+      </b-navbar-toggle>
+      <b-navbar-toggle target="navbar-toggle-collapse">
         <a href="/" class="link">
           Cerrar Sesión
         </a>

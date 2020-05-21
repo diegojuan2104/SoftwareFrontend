@@ -19,7 +19,7 @@
         <p class="my-4">Nombre: {{ nombreCompletoProp }}</p>
         <p class="my-4">Contacto: {{ contactoPropuesta }}</p>
         <p class="my-4">Email: {{ correoP }}</p>
-        <p class="my-4">Descripcion: {{ descripcionP }}</p>
+        <p class="my-4">Descripción: {{ descripcionP }}</p>
         <p class="my-4">Ocupacion: {{ ocupacionP }}</p>
         <p class="my-4">Ciudad: {{ ciudadP }}</p>
         <br />
@@ -28,7 +28,7 @@
         </center>
         <p class="my-4">Propuesta numero: {{ idPropuesta }}</p>
         <p class="my-4">Tipo de Convenio: {{ tipoPropuesta }}</p>
-        <p class="my-4">Descripcion: {{ descripcionPropuesta }}</p>
+        <p class="my-4">Descripción: {{ descripcionPropuesta }}</p>
         <p class="my-4">Posibles Beneficios: {{ beneficiosPropuesta }}</p>
         <p class="my-4">Estado: {{ estadoPropuesta }}</p>
       </b-card>
@@ -38,7 +38,7 @@
       <h1>Tareas:</h1>
       <br />
       <b-table striped hover :items="tareasReducidas">
-        <template v-slot:cell(descripcion)="fila">
+        <template v-slot:cell(descripción)="fila">
           <b-button
             size="sm"
             block
@@ -49,8 +49,7 @@
           <b-modal id="modal-1" v-model="modalShow" title="Tarea">
             <p class="my-4">Tarea numero: {{ idTarea }}</p>
             <p class="my-4">Nombre: {{ nombreTarea }}</p>
-            <p class="my-4">Descripcion: {{ descripcionTarea }}</p>
-            <p v-if="this.Tareas">Fecha</p>
+            <p class="my-4">Descripción: {{ descripcionTarea }}</p>
             <template v-slot:modal-footer>
               <div class="w-200">
                 <b-button
@@ -64,7 +63,7 @@
           </b-modal>
         </template>
 
-        <template v-slot:cell(aprobacion)="row">
+        <template v-slot:cell(aprobación)="row">
           <b-form-checkbox
             size="lg"
             v-model="checkboxes[row.item.id]['aprobado']"
