@@ -11,9 +11,9 @@ export default {
         })
         .then(res => {
           console.log(res);
-
           const user = res.data.id;
           const userRol = res.data.rol;
+          gi;
           console.log(user);
           console.log(userRol);
           localStorage.setItem("idUser", user);

@@ -36,7 +36,7 @@
         <a href class="link">Home</a>
       </b-navbar-toggle>
       <b-navbar-toggle target="navbar-toggle-collapse">
-        <a href="/" class="link">Cerrar Sesión</a>
+        <a href="/" class="link" @click="cerrarSesion()">Cerrar Sesión</a>
       </b-navbar-toggle>
     </b-navbar>
 
