@@ -1,5 +1,5 @@
 import axios from "axios";
-import url from "axios";
+import config from "../assets/config";
 export default {
   beforeMount() {
     this.cargarPropuestas();
@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     token() {
-      let token = sessionStorage.getItem("token");
+      let token = localStorage.getItem("token");
       return token;
     },
 
@@ -60,7 +60,7 @@ export default {
     },
     //F5
     recargarPagina() {
-      window.location.replace("http://localhost:3000/evaluaciones");
+      window.location.replace(url2 + "evaluaciones");
     },
 
     async evaluarTarea() {
@@ -112,7 +112,7 @@ export default {
           formData.set("idPropuesta", this.idPropuesta);
 
           axios
-            .post("http://localhost:3001/api/v1/evaluaciones", formData, {
+            .post(config.url + "evaluaciones", formData, {
               headers: { token }
             })
             .then(res => {
@@ -132,18 +132,14 @@ export default {
         estado
       };
       axios
-        .put(
-          "http://localhost:3001/api/v1/evaluaciones/" + this.idPropuesta,
-          estadoObj,
-          {
-            headers: { token }
-          }
-        )
+        .put(config.url + "evaluaciones/" + this.idPropuesta, estadoObj, {
+          headers: { token }
+        })
         .then(res => {
           console.log(res);
           axios
             .post(
-              "http://localhost:3001/api/v1/correos",
+              config.url + "/correos",
               { correo: this.correoP },
               {
                 headers: { token }
@@ -151,7 +147,7 @@ export default {
             )
             .then(res => {
               console.log(res);
-              //this.recargarPagina();
+              this.recargarPagina();
             });
         });
     },
@@ -161,7 +157,7 @@ export default {
         const token = this.token();
         this.propuestaReducida = Array();
         this.propuestas = Array();
-        const res = await axios.get("http://localhost:3001/api/v1/propuestas", {
+        const res = await axios.get(config.url + "propuestas", {
           headers: { token }
         });
         this.propuestas = res.data;
@@ -190,7 +186,7 @@ export default {
       try {
         const token = this.token();
         this.tareas = Array();
-        const res = await axios.get("http://localhost:3001/api/v1/tareas", {
+        const res = await axios.get(config.url + "tareas", {
           headers: { token }
         });
         this.tareas = res.data;
@@ -224,7 +220,7 @@ export default {
         const token = this.token();
         this.involucrados = Array();
         const res = await axios.get(
-          "http://localhost:3001/api/v1/involucrados/" + this.idPropuesta,
+          config.url + "involucrados/" + this.idPropuesta,
           {
             headers: { token }
           }

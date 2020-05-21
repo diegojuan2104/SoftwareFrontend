@@ -1,11 +1,12 @@
 import axios from "axios";
+import config from "../assets/config";
 export default {
   mounted() {
     let token = localStorage.getItem("token");
     if (token != "") {
       console.log(token);
       axios
-        .get("http://localhost:3001/api/v1/autenticacion/" + token, {
+        .get(config.url + "autenticacion/" + token, {
           headers: { token: token }
         })
         .then(res => {
@@ -15,14 +16,14 @@ export default {
           const userRol = res.data.rol;
           console.log(user);
           console.log(userRol);
-          sessionStorage.setItem("idUser", user);
-          sessionStorage.setItem("userRol", userRol);
-          sessionStorage.setItem("token", token);
+          localStorage.setItem("idUser", user);
+          localStorage.setItem("userRol", userRol);
+          localStorage.setItem("token", token);
 
           if (userRol == 2) {
-            window.location.replace("http://localhost:3000/evaluaciones");
+            window.location.replace(config.url2 + "/evaluaciones");
           } else {
-            window.location.replace("http://localhost:3000/propuestas");
+            window.location.replace(config.url2 + "propuestas");
           }
         })
         .catch(error => {
@@ -33,9 +34,9 @@ export default {
     }
   },
   beforeMount() {
-    sessionStorage.setItem("idUser", "");
-    sessionStorage.setItem("userRol", "");
-    sessionStorage.setItem("token", "");
+    localStorage.setItem("idUser", "");
+    localStorage.setItem("userRol", "");
+    localStorage.setItem("token", "");
   },
 
   data() {
@@ -51,21 +52,21 @@ export default {
           correo: this.correo,
           clave: this.clave
         };
-        let res = await axios.post("http://localhost:3001/api/v1/login", log);
+        let res = await axios.post(config.url + "login", log);
         console.log(res);
         const token = res.data.info;
         const user = res.data.usuario.id;
         const userRol = res.data.usuario.rol;
         console.log(user);
         console.log(userRol);
-        sessionStorage.setItem("idUser", user);
-        sessionStorage.setItem("userRol", userRol);
-        sessionStorage.setItem("token", token);
+        localStorage.setItem("idUser", user);
+        localStorage.setItem("userRol", userRol);
+        localStorage.setItem("token", token);
         //axios.defaults.headers.common["Authorization"] = token;
         if (userRol == 2) {
-          window.location.replace("http://localhost:3000/evaluaciones");
+          window.location.replace(config.url2 + "evaluaciones");
         } else {
-          window.location.replace("http://localhost:3000/propuestas");
+          window.location.replace(config.url2 + "propuestas");
         }
       } catch (error) {
         alert("Contraseña y/o usario incorrectos");

@@ -94,27 +94,19 @@ export default {
         .then(res => {
           console.log(res);
           axios
-            .delete(
-              "http://localhost:3001/api/v1/involucrados/" +
-                this.propuesta.idPropuesta,
-              {
-                headers: { token }
-              }
-            )
+            .delete(config.url + "involucrados/" + this.propuesta.idPropuesta, {
+              headers: { token }
+            })
             .then(res => {
               const involucrados = {
-                idUsuario: sessionStorage.getItem("idUser"),
+                idUsuario: localStorage.getItem("idUser"),
                 entidades: this.entidadesAgregadas,
                 idPropuesta: this.propuesta.idPropuesta
               };
               axios
-                .post(
-                  "http://localhost:3001/api/v1/involucrados",
-                  involucrados,
-                  {
-                    headers: { token }
-                  }
-                )
+                .post(config.url + "involucrados", involucrados, {
+                  headers: { token }
+                })
                 .then(res => {
                   alert(
                     "Propuesta Actualizada id:" + this.propuesta.idPropuesta
@@ -141,7 +133,7 @@ export default {
       try {
         if (this.validarPropuestaEvaluada(item)) return;
         this.limpiarCampos();
-        let token = sessionStorage.getItem("token");
+        let token = localStorage.getItem("token");
 
         let posicion = this.propuestas.findIndex(
           propuesta => propuesta.id == item.id
@@ -158,8 +150,7 @@ export default {
         };
 
         const res = await axios.get(
-          "http://localhost:3001/api/v1/involucrados/" +
-            this.propuesta.idPropuesta,
+          config.url + "involucrados/" + this.propuesta.idPropuesta,
           {
             headers: { token }
           }
@@ -193,8 +184,8 @@ export default {
     // Carga las porpuestas en la tabla
     async cargarPropuestas() {
       try {
-        let idUser = sessionStorage.getItem("idUser");
-        let token = sessionStorage.getItem("token");
+        let idUser = localStorage.getItem("idUser");
+        let token = localStorage.getItem("token");
         console.log(config.url);
         const res = await axios.get(
           config.url + "propuestasUsuarios/" + idUser,
@@ -249,8 +240,8 @@ export default {
     async cargarEntidades() {
       //this.entidadesReducidas = Array();
       try {
-        let token = sessionStorage.getItem("token");
-        const res = await axios.get("http://localhost:3001/api/v1/entidades", {
+        let token = localStorage.getItem("token");
+        const res = await axios.get(config.url + "entidades", {
           headers: { token }
         });
         this.entidades = res.data;
@@ -269,27 +260,26 @@ export default {
     },
     //F5
     recargarPagina() {
-      window.location.replace("http://localhost:3000/propuestas");
+      window.location.replace(config.url2 + "propuestas");
     },
 
     token() {
-      let token = sessionStorage.getItem("token");
+      let token = localStorage.getItem("token");
       return token;
     },
     //Elimina una propuesta realizada
     async eliminarPropuesta({ item }) {
       try {
         if (this.validarPropuestaEvaluada(item)) return;
-        let token = sessionStorage.getItem("token");
+        let token = localStorage.getItem("token");
         const propuestaEliminada = await axios.delete(
-          "http://localhost:3001/api/v1/propuestas/" + item.id,
+          config.url + "propuestas/" + item.id,
           { headers: { token } }
         );
         //Elimina los involucrados relacionados
-        const res = await axios.delete(
-          "http://localhost:3001/api/v1/involucrados/" + item.id,
-          { headers: { token } }
-        );
+        const res = await axios.delete(config.url + "involucrados/" + item.id, {
+          headers: { token }
+        });
 
         let posicion1 = this.propuestas.findIndex(
           propuesta => propuesta.id == item.id
@@ -335,7 +325,7 @@ export default {
         };
 
         axios
-          .post("http://localhost:3001/api/v1/propuestas", propuesta, {
+          .post(config.url + "propuestas", propuesta, {
             headers: { token }
           })
           .then(res => {
@@ -360,13 +350,13 @@ export default {
             };
 
             const involucrados = {
-              idUsuario: sessionStorage.getItem("idUser"),
+              idUsuario: localStorage.getItem("idUser"),
               entidades: this.entidadesAgregadas,
               idPropuesta: idPropuestaCreada
             };
             console.log(involucrados);
             axios
-              .post("http://localhost:3001/api/v1/involucrados", involucrados, {
+              .post(config.url + "involucrados", involucrados, {
                 headers: { token }
               })
               .then(res => {
@@ -408,7 +398,7 @@ export default {
         }
         let token = this.token();
         axios
-          .get("http://localhost:3001/api/v1/evaluaciones/" + item.id, {
+          .get(config.url + "evaluaciones/" + item.id, {
             headers: { token }
           })
           .then(res => {
