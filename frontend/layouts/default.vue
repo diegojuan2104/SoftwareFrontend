@@ -31,12 +31,12 @@
       ></b-img>
 
       <div class="title">
-        Gestion de Propuestas y Evaluaciones de Convenios
+        Gestión de Propuestas y Evaluaciones de Convenios
       </div>
 
       <b-navbar-toggle target="navbar-toggle-collapse">
         <a href="/" class="link">
-          Cerrar Sesion
+          Cerrar Sesión
         </a>
       </b-navbar-toggle>
     </b-navbar>
