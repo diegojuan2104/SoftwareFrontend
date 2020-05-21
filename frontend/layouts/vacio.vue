@@ -7,7 +7,7 @@
         <b-form action="javascript:void(0)" @submit="iniciarSesion()">
           <center>
             <h1>LOGIN</h1>
-            <p class="mensaje">Iniciar sesion como estudiante o como evaluador</p>
+            <p class="mensaje">Iniciar sesión cómo estudiante o cómo evaluador</p>
             <div>
               <b-form-group label="Email" label-for="usuario">
                 <b-form-input
