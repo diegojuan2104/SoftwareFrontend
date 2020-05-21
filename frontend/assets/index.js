@@ -36,7 +36,6 @@ export default {
   beforeMount() {
     localStorage.setItem("idUser", "");
     localStorage.setItem("userRol", "");
-    localStorage.setItem("token", "");
   },
 
   data() {
