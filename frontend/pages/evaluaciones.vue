@@ -29,8 +29,11 @@
         <p class="my-4">Propuesta numero: {{ idPropuesta }}</p>
         <p class="my-4">Tipo de Convenio: {{ tipoPropuesta }}</p>
         <p class="my-4">Descripción: {{ descripcionPropuesta }}</p>
+        <p class="my-4">Entidades: {{ entidadesP }}</p>
         <p class="my-4">Posibles Beneficios: {{ beneficiosPropuesta }}</p>
         <p class="my-4">Estado: {{ estadoPropuesta }}</p>
+        
+
       </b-card>
     </b-container>
 

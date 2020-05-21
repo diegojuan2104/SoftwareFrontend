@@ -27,6 +27,7 @@ export default {
       tipoPropuesta: "",
       descripcionPropuesta: "",
       beneficiosPropuesta: "",
+      entidadesP:"",
       contactoPropuesta: "",
       estadoPropuesta: "",
       idPropuesta: "",
@@ -227,7 +228,16 @@ export default {
         );
 
         this.involucrados = res.data;
-        console.log(this.involucrados);
+        console.log("involucrados ",this.involucrados);
+
+        let entidadesC=""
+        
+        for (let index = 0; index < this.involucrados.length; index++) {
+              entidadesC= entidadesC+"-"+this.involucrados[index].nombre_entidad;
+          
+        }
+
+        this.entidadesP=entidadesC
         this.nombreCompletoProp =
           this.involucrados[0].nombre_usuario +
           " " +
@@ -254,16 +264,23 @@ export default {
       this.enEvaluacion = true;
       let numeroPropuesta = i.item.id_Propuesta;
       let propuestaMostar;
+      let entidadesConc;
       console.log(numeroPropuesta);
+      
+      
 
       for (let i = 0; i < this.propuestas.length; i++) {
         if (this.propuestas[i].id === numeroPropuesta) {
           propuestaMostar = this.propuestas[i];
+          console.log("aqui",propuestaMostar)
           break;
         }
+        
+        
       }
 
-      (this.tipoPropuesta = propuestaMostar.tipo_convenio),
+      
+        (this.tipoPropuesta = propuestaMostar.tipo_convenio),
         (this.descripcionPropuesta = propuestaMostar.descripcion_iniciativa),
         (this.beneficiosPropuesta = propuestaMostar.beneficios),
         (this.contactoPropuesta = propuestaMostar.info_contacto),
@@ -271,6 +288,9 @@ export default {
         (this.idPropuesta = numeroPropuesta);
 
       this.traerInvolucrados();
+
+
+      
     }
   }
 };
