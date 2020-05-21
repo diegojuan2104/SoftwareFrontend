@@ -1,5 +1,23 @@
 import axios from "axios";
 export default {
+  mounted() {
+    let token = localStorage.getItem("token");
+    console.log(token);
+    axios
+      .get(
+        "https://seguridad-udem-api.herokuapp.com/api/v1/verify",
+        {
+          Modulo: "Gestion"
+        },
+        { headers: { token: token } }
+      )
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  },
   beforeMount() {
     sessionStorage.setItem("idUser", "");
     sessionStorage.setItem("userRol", "");

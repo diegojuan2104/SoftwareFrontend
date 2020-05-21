@@ -50,6 +50,7 @@
             <p class="my-4">Tarea numero: {{ idTarea }}</p>
             <p class="my-4">Nombre: {{ nombreTarea }}</p>
             <p class="my-4">Descripcion: {{ descripcionTarea }}</p>
+            <p v-if="this.Tareas">Fecha</p>
             <template v-slot:modal-footer>
               <div class="w-200">
                 <b-button

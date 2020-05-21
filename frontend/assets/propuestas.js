@@ -54,7 +54,9 @@ export default {
       tipoConvenioP: "",
       beneficiosP: "",
       estadoP: "",
-      descripcionP: ""
+      descripcionP: "",
+      fechaEvaluacion: "",
+      mostrarFecha: false
     };
   },
   methods: {
@@ -393,7 +395,7 @@ export default {
     detallesPropuesta({ item }) {
       try {
         this.idPropuesta = item.id;
-
+        this.fechaEvaluacion = "Pendiente";
         for (let i = 0; i < this.propuestas.length; i++) {
           if (this.idPropuesta === this.propuestas[i].id) {
             console.log(this.propuestas[i]);
@@ -422,18 +424,22 @@ export default {
                 Archivo: true,
                 comentario: tarea.comentario
               };
+              let fecha = tarea.fecha.slice(0, 10);
+              this.fechaEvaluacion = fecha;
               this.tareas.push(tareaObj);
               this.archivoTareas.push(archivo);
             });
+            this.mostrarFecha = true;
             console.log(this.tareas);
             console.log(this.archivoTareas);
           });
       } catch (error) {
         console.log(error);
       }
+      console.log(this.mostrarFecha);
     },
 
-    Entidad({ item }) {
+    detallesEntidad({ item }) {
       console.log(this.entidades);
       console.log(item);
 
@@ -442,26 +448,30 @@ export default {
       );
       const entidad = this.entidades[posicion];
       const info =
-        "id: " +
+        "\n Id: " +
         entidad.id +
-        "\n nombre: " +
+        "\n Nombre: " +
         entidad.nombre +
-        "\n direccion: " +
+        "\n Direccion: " +
         entidad.direccion +
-        "\n pagina_web: " +
+        "\n página_web: " +
         entidad.pagina_web +
-        "\n nit: " +
+        "\n NIT: " +
         entidad.nit +
-        "\n pais: " +
+        "\n País: " +
         entidad.pais +
-        "\n departamento: " +
+        "\n Departamento: " +
         entidad.departamento +
-        "\n ciudad: " +
+        "\n Ciudad: " +
         entidad.ciudad;
       alert(info);
     },
 
     descargarArchivo(item) {
+      if (this.archivoTareas[item.item.id - 1].length == 0) {
+        alert("Esta tarea no tiene archivos");
+        return;
+      }
       console.log(item.item.id);
       let archivo = this.archivoTareas[item.item.id - 1];
       console.log(archivo);

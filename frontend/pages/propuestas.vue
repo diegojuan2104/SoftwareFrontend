@@ -32,8 +32,9 @@
               ></b-form-select>
 
               <h4>Lista de entidades involucradas</h4>
-              <b-card>
+              <b-card responsive>
                 <b-table
+                  responsive
                   ref="tablaEntidadesAgre"
                   striped
                   hover
@@ -108,9 +109,9 @@
           </b-form>
         </b-card>
       </div>
-      <b-card class="bcard">
+      <b-card responsive class="bcard">
         <h3>Propuestas Realizadas</h3>
-        <b-table ref="tablaPropuestas" striped hover :items="this.propuestasReducidas">
+        <b-table responsive ref="tablaPropuestas" striped hover :items="this.propuestasReducidas">
           <template v-slot:cell(Detalles)="row">
             <b-button
               block
@@ -124,6 +125,7 @@
               <p class="my-4">Descripcion: {{descripcionP}}</p>
               <p class="my-4">Beneficios:{{beneficiosP}}</p>
               <p class="my-4">Estado:{{estadoP}}</p>
+              <p class="my-4" v-if="mostrarFecha == true">FechaEvaluacion:{{fechaEvaluacion}}</p>
               <b-table responsive ref="tablaPropuestas" striped hover :items="tareas">
                 <template v-slot:cell(Archivo)="row">
                   <b-button block variant="danger" size="sm" @click="descargarArchivo(row)">Archivo</b-button>
@@ -135,7 +137,8 @@
                     variant="danger"
                     size="sm"
                     class="float-right"
-                    @click="(modalShow = !modalShow)"
+                    @click="((modalShow = !modalShow),
+                    (tareas = []),(mostrarFecha = false))"
                   >OK</b-button>
                 </div>
               </template>
