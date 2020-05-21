@@ -1,4 +1,5 @@
 import axios from "axios";
+import config from "../assets/config";
 export default {
   beforeMount() {
     // Carga las propuestas,PENDIENTE falta validar que solo sean las de un usuario en especifico
@@ -84,8 +85,7 @@ export default {
 
       axios
         .put(
-          "http://localhost:3001/api/v1/propuestas/" +
-            this.propuesta.idPropuesta,
+          config.url + "propuestas/" + this.propuesta.idPropuesta,
           propuesta,
           {
             headers: { token }
@@ -195,8 +195,9 @@ export default {
       try {
         let idUser = sessionStorage.getItem("idUser");
         let token = sessionStorage.getItem("token");
+        console.log(config.url);
         const res = await axios.get(
-          "http://localhost:3001/api/v1/propuestasUsuarios/" + idUser,
+          config.url + "propuestasUsuarios/" + idUser,
           {
             headers: { token }
           }

@@ -141,7 +141,18 @@ export default {
         )
         .then(res => {
           console.log(res);
-          this.recargarPagina();
+          axios
+            .post(
+              "http://localhost:3001/api/v1/correos",
+              { correo: this.correoP },
+              {
+                headers: { token }
+              }
+            )
+            .then(res => {
+              console.log(res);
+              //this.recargarPagina();
+            });
         });
     },
     // Carga las porpuestas en la tabla
@@ -174,6 +185,7 @@ export default {
       }
     },
 
+    //carga las tareas en una tabla para ser evaluadas
     async cargarTareas() {
       try {
         const token = this.token();
@@ -190,8 +202,8 @@ export default {
           let tareasReducida = {
             id: this.tareas[i].id,
             nombre_tarea: this.tareas[i].nombre,
-            descripcion: true,
-            aprobacion: true,
+            descripción: true,
+            aprobación: true,
             pdf: true,
             comentario: ""
           };
@@ -206,6 +218,7 @@ export default {
       }
     },
 
+    // trae los involucrados de una propuesta para poder observarlos
     async traerInvolucrados() {
       try {
         const token = this.token();
@@ -232,6 +245,7 @@ export default {
       }
     },
 
+    // carga los datos de una tarea para mostrarla
     detallesTarea({ item }) {
       let pos = parseInt(item.id, 10) - 1;
       this.idTarea = this.tareas[pos].id;
@@ -239,6 +253,7 @@ export default {
       this.descripcionTarea = this.tareas[pos].descripcion;
     },
 
+    //carga la informacion de una propuesta
     cargarInfoPropuesta(i) {
       this.enEvaluacion = true;
       let numeroPropuesta = i.item.id_Propuesta;

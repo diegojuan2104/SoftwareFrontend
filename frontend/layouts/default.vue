@@ -30,10 +30,13 @@
         width="200px"
       ></b-img>
 
-      <div class="title">Gestion de Propuestas y Evaluaciones de Convenios</div>
+      <div class="title">Gestión de Propuestas y Evaluaciones de Convenios</div>
 
       <b-navbar-toggle target="navbar-toggle-collapse">
-        <a href="/" class="link" @click="cerrarSesion()">Cerrar Sesion</a>
+        <a href class="link">Home</a>
+      </b-navbar-toggle>
+      <b-navbar-toggle target="navbar-toggle-collapse">
+        <a href="/" class="link">Cerrar Sesión</a>
       </b-navbar-toggle>
     </b-navbar>
 

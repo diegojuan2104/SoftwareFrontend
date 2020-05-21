@@ -98,7 +98,7 @@
                 variant="danger"
                 type="submit"
                 v-if="this.enEdicion == false"
-              >Subir info</b-button>
+              >Subir información</b-button>
               <b-button
                 block
                 variant="danger"
@@ -122,10 +122,10 @@
             <b-modal id="modal-1" size="xl" v-model="modalShow" title="Detalles">
               <p class="my-4">Id propuesta: {{idPropuesta}}</p>
               <p class="my-4">Tipo Convenio: {{tipoConvenioP}}</p>
-              <p class="my-4">Descripcion: {{descripcionP}}</p>
+              <p class="my-4">Descripción: {{descripcionP}}</p>
               <p class="my-4">Beneficios:{{beneficiosP}}</p>
               <p class="my-4">Estado:{{estadoP}}</p>
-              <p class="my-4" v-if="mostrarFecha == true">FechaEvaluacion:{{fechaEvaluacion}}</p>
+              <p class="my-4" v-if="mostrarFecha == true">Fecha Evaluación:{{fechaEvaluacion}}</p>
               <b-table responsive ref="tablaPropuestas" striped hover :items="tareas">
                 <template v-slot:cell(Archivo)="row">
                   <b-button block variant="danger" size="sm" @click="descargarArchivo(row)">Archivo</b-button>
