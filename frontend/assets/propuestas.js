@@ -3,6 +3,7 @@ const config = {
   url: "https://gestion-propuestas-api.herokuapp.com/api/v1/",
   url2: "http://localhost:3000/"
 };
+
 export default {
   beforeMount() {
     // Carga las propuestas,PENDIENTE falta validar que solo sean las de un usuario en especifico
